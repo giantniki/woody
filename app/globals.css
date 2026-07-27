@@ -220,29 +220,30 @@ body.has-woo-cursor * {
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
 }
 .layer--back {
-  width: 52%;
-  height: 66vh;
+  width: 54%;
+  height: 64vh;
   z-index: 1;
 }
 .layer--front {
-  width: 40%;
-  height: 50vh;
+  width: 46%;
+  height: 48vh;
   z-index: 2;
 }
+/* Outer offsets pulled inward so the two photos overlap ~12% over the centre. */
 .triplet--right .layer--back {
-  right: 3%;
+  right: 5%;
   top: 6%;
 }
 .triplet--right .layer--front {
-  left: 5%;
+  left: 7%;
   bottom: 8%;
 }
 .triplet--left .layer--back {
-  left: 3%;
+  left: 5%;
   top: 6%;
 }
 .triplet--left .layer--front {
-  right: 5%;
+  right: 7%;
   bottom: 8%;
 }
 
