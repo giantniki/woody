@@ -100,7 +100,7 @@ body.has-woo-cursor * {
 .hero__bg {
   position: absolute;
   inset: 0;
-  background: url("/img/taphuys-12.jpg") center/cover no-repeat;
+  background: url("/img/sfeer-kegs.jpg") center/cover no-repeat;
   transform: scale(1.05);
   animation: heroZoom 18s ease-in-out infinite alternate;
 }
