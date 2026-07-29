@@ -2,11 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import { closing } from "@/lib/content";
+import DancingText from "@/components/DancingText";
 
 // Colours the banner border + text cycle through, every 300ms.
-const COLORS = ["#e63946", "#f4a300", "#2a9d8f", "#3d5afe", "#111111", "#c1121f"];
+const DEFAULT_COLORS = [
+  "#e63946",
+  "#f4a300",
+  "#2a9d8f",
+  "#3d5afe",
+  "#111111",
+  "#c1121f",
+];
 
-export default function ClosingBanner() {
+export default function ClosingBanner({ dancing = false, colors = DEFAULT_COLORS }) {
   const bannerRef = useRef(null);
 
   useEffect(() => {
@@ -14,11 +22,11 @@ export default function ClosingBanner() {
     if (!el) return;
     let i = 0;
     const id = setInterval(() => {
-      i = (i + 1) % COLORS.length;
-      el.style.setProperty("--banner-color", COLORS[i]);
+      i = (i + 1) % colors.length;
+      el.style.setProperty("--banner-color", colors[i]);
     }, 300);
     return () => clearInterval(id);
-  }, []);
+  }, [colors]);
 
   return (
     <section className="closing" id="reserveren">
@@ -28,7 +36,11 @@ export default function ClosingBanner() {
       />
       <div className="closing__note">{closing.bannerNote}</div>
       <a className="closing__banner" ref={bannerRef} href={`mailto:info@taphuysarnhem.nl`}>
-        {closing.bannerLabel}
+        {dancing ? (
+          <DancingText text={closing.bannerLabel} intensity={1.5} />
+        ) : (
+          closing.bannerLabel
+        )}
       </a>
       <footer className="closing__footer">
         <span>© ’t Taphuys Arnhem. Alle rechten voorbehouden.</span>

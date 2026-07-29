@@ -1,15 +1,20 @@
 "use client";
 
 import { intro, steps, visit, locations } from "@/lib/content";
+import DancingText from "@/components/DancingText";
 
-export default function InfoSection() {
+export default function InfoSection({ dancing = false }) {
+  const H = ({ text }) =>
+    dancing ? <DancingText text={text} intensity={1.4} /> : text;
   return (
     <section className="info" id="info">
       <p className="info__intro">{intro.heading}</p>
       <p className="info__intro-sub">{intro.body}</p>
 
       <div className="steps">
-        <h2 className="steps__title">{steps.title}</h2>
+        <h2 className="steps__title">
+          <H text={steps.title} />
+        </h2>
         <ol className="steps__list">
           {steps.items.map((s) => (
             <li className="step" key={s.n}>
@@ -22,7 +27,9 @@ export default function InfoSection() {
       </div>
 
       <div className="visit">
-        <h2 className="visit__title">{visit.title}</h2>
+        <h2 className="visit__title">
+          <H text={visit.title} />
+        </h2>
         <div className="visit__grid">
           <div className="visit__col">
             <h3 className="visit__place">{visit.primary.name}</h3>

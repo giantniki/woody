@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 // Custom cursor: the word "Woo" follows the pointer (Cara de Vaca hides the real
 // cursor and trails a small graphic — here the graphic is the word).
-export default function Cursor() {
+export default function Cursor({ variant, label = "Woo" }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -64,8 +64,12 @@ export default function Cursor() {
   }, []);
 
   return (
-    <div className="woo-cursor" ref={ref} aria-hidden="true">
-      Woo
+    <div
+      className={`woo-cursor${variant ? ` woo-cursor--${variant}` : ""}`}
+      ref={ref}
+      aria-hidden="true"
+    >
+      {label}
     </div>
   );
 }

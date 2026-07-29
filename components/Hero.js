@@ -1,14 +1,45 @@
 "use client";
 
 import { brand, heroLockup } from "@/lib/content";
+import { heroCollage, heroCollageBig } from "@/lib/woody-content";
 import { Smiley } from "@/components/icons";
 import RotatingIcon from "@/components/RotatingIcon";
 
-export default function Hero() {
+// background: "photo" (landing 1) | "collage" (burgundy + scattered photos, landing 2/3)
+// collageVariant: "default" (8 scattered tiles) | "big" (fewer/larger tiles, one
+//                 bleeds down into the next section — see heroCollageBig).
+export default function Hero({ background = "photo", collageVariant = "default" }) {
+  const isBig = background === "collage" && collageVariant === "big";
+  const collage = isBig ? heroCollageBig : heroCollage;
+
   return (
-    <header className="hero">
-      <div className="hero__bg" />
-      <div className="hero__overlay" />
+    <header
+      className={`hero${background === "collage" ? ` hero--collage${isBig ? " hero--collage-big" : ""}` : ""}`}
+    >
+      {background === "collage" ? (
+        <div className="hero__collage" aria-hidden="true">
+          {collage.map((p, i) => (
+            <div
+              key={i}
+              className={`hero__tile${p.cross ? " hero__tile--cross" : ""}`}
+              style={{
+                top: p.top,
+                left: p.left,
+                right: p.right,
+                width: p.w,
+                height: p.h,
+                transform: `rotate(${p.r}deg)`,
+                backgroundImage: `url(${p.src})`,
+              }}
+            />
+          ))}
+        </div>
+      ) : (
+        <>
+          <div className="hero__bg" />
+          <div className="hero__overlay" />
+        </>
+      )}
 
       <nav className="hero__nav">
         <div className="hero__socials">

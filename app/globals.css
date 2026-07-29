@@ -12,6 +12,24 @@
   box-sizing: border-box;
 }
 
+/* ---- Dancing letters (see components/DancingText.js) ---- */
+.dt {
+  display: inline-block;
+}
+.dt-line {
+  display: block;
+}
+.dt-char {
+  display: inline-block;
+  will-change: transform;
+}
+.dt-space {
+  display: inline;
+  white-space: pre;
+  /* keep a word gap even when neighbouring letters jitter sideways */
+  padding: 0 0.07em;
+}
+
 html,
 body {
   margin: 0;
@@ -267,7 +285,10 @@ body.has-woo-cursor * {
   text-stroke: 2px var(--ink);
   letter-spacing: 0.01em;
 }
-.lockup-text span {
+/* direct spans = the plain multiline case; .dt-line = the DancingText case.
+   (Do NOT match .dt-char, which must stay inline-block.) */
+.lockup-text > span,
+.lockup-text .dt-line {
   display: block;
 }
 .triplet--left .lockup-text {

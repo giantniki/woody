@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { showcase } from "@/lib/content";
+import DancingText from "@/components/DancingText";
 
-export default function ParallaxShowcase() {
+export default function ParallaxShowcase({ dancing = false }) {
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -69,9 +70,13 @@ export default function ParallaxShowcase() {
           {/* foreground lockup — transparent, pops the most */}
           <div className="layer layer--lockup" data-speed="0.26">
             <h2 className="lockup-text">
-              {item.lockup.split("\n").map((line, li) => (
-                <span key={li}>{line}</span>
-              ))}
+              {dancing ? (
+                <DancingText text={item.lockup} intensity={1.7} />
+              ) : (
+                item.lockup
+                  .split("\n")
+                  .map((line, li) => <span key={li}>{line}</span>)
+              )}
             </h2>
           </div>
 

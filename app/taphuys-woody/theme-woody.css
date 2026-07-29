@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Woody theme layered over the FIRST landing page's markup.
+   We reuse the page-1 components/classes verbatim and only remap the design
+   tokens (colours + fonts) here, plus a few targeted fixes. Scoped under
+   .theme-woody so the original page (/) is untouched.
+   ========================================================================== */
+
+.theme-woody {
+  /* woody palette */
+  --woody-red: #6d150f;
+  --woody-cream: #f1f0cd;
+  --woody-yellow: #f2c00d;
+
+  /* remap the page-1 tokens → woody */
+  --cream: #f1f0cd;
+  --ink: #6d150f;
+  --red: #f2c00d; /* accent */
+  --orange: #6d150f;
+  --font-display: var(--font-woody-display), cursive;
+  --font-serif: var(--font-woody-serif), Georgia, serif;
+
+  min-height: 100vh;
+  background: var(--woody-cream);
+  color: var(--woody-red);
+}
+
+/* --------------------------------------------------------------- cursor */
+.theme-woody .woo-cursor--woody {
+  font-family: var(--font-woody-display), cursive;
+  font-size: 26px;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+.theme-woody .woo-cursor--woody.is-hover {
+  color: #fff;
+  font-size: 40px;
+}
+
+/* ---------------------------------------------------------------- hero */
+/* Combined hero: landing-1 title (changing icon lockup) over landing-2's
+   burgundy background + scattered photo collage. */
+.theme-woody .hero--collage {
+  background: var(--woody-red);
+}
+.theme-woody .hero__collage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.theme-woody .hero__tile {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+}
+/* lockup + nav + button sit above the collage */
+.theme-woody .hero--collage .hero__lockup,
+.theme-woody .hero--collage .hero__nav {
+  z-index: 3;
+}
+
+/* ---- "big" collage variant: fewer/larger photos, one bleeds into next section.
+   We let the hero overflow (so the crossing tile can extend past the bottom),
+   and lift the whole hero above the following .showcase so the bleed paints
+   on top of it. */
+.theme-woody .hero--collage-big {
+  overflow: visible;
+  z-index: 5;
+}
+.theme-woody .hero--collage-big .hero__tile--cross {
+  z-index: 2;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* reserve button → yellow pill with burgundy text */
+.theme-woody .hero__reserve {
+  background: var(--woody-yellow);
+  color: var(--woody-red);
+  border-radius: 999px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
+}
+.theme-woody .hero__reserve:hover {
+  background: #d9ad0a;
+}
+
+/* ------------------------------------------------------- showcase lockups */
+/* Flat burgundy — same style as the "Zelf tappen in drie stappen" H1. */
+.theme-woody .lockup-text,
+.theme-woody .triplet--left .lockup-text {
+  color: var(--woody-red);
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+}
+
+/* ------------------------------------------------------------ info block */
+.theme-woody .step__n {
+  color: var(--woody-red);
+}
+.theme-woody .visit__links a:hover {
+  color: var(--woody-yellow);
+}
+
+/* --------------------------------------------------------------- closing */
+/* banner is puffy + dancing; colour cycles through the woody palette (set in
+   the page). Give it a touch more presence on the dark image. */
+.theme-woody .closing__banner {
+  border-width: 7px;
+}
+
+/* dancing letters keep the block line layout inside these headings */
+.theme-woody .lockup-text .dt,
+.theme-woody .visit__title .dt,
+.theme-woody .steps__title .dt,
+.theme-woody .closing__banner .dt {
+  display: inline-block;
+}
