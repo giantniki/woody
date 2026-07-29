@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { closing } from "@/lib/content";
+import { closing, brand } from "@/lib/content";
 import DancingText from "@/components/DancingText";
 
 // Colours the banner border + text cycle through, every 300ms.
@@ -29,23 +29,27 @@ export default function ClosingBanner({ dancing = false, colors = DEFAULT_COLORS
   }, [colors]);
 
   return (
-    <section className="closing" id="reserveren">
-      <div
-        className="closing__image"
-        style={{ backgroundImage: `url(${closing.image})` }}
-      />
-      <div className="closing__note">{closing.bannerNote}</div>
-      <a className="closing__banner" ref={bannerRef} href={`mailto:info@taphuysarnhem.nl`}>
-        {dancing ? (
-          <DancingText text={closing.bannerLabel} intensity={1.5} />
-        ) : (
-          closing.bannerLabel
-        )}
-      </a>
+    <>
+      <section className="closing" id="reserveren">
+        <div
+          className="closing__image"
+          style={{ backgroundImage: `url(${closing.image})` }}
+        />
+        <div className="closing__note">{closing.bannerNote}</div>
+      </section>
+      <section className="closing__bar" ref={bannerRef}>
+        <a className="closing__banner" href={`mailto:${brand.email}`}>
+          {dancing ? (
+            <DancingText text={closing.bannerLabel} intensity={1.5} />
+          ) : (
+            closing.bannerLabel
+          )}
+        </a>
+      </section>
       <footer className="closing__footer">
-        <span>© ’t Taphuys Arnhem. Alle rechten voorbehouden.</span>
-        <a href="mailto:info@taphuysarnhem.nl">info@taphuysarnhem.nl</a>
+        <span>© Bar Woody. Alle rechten voorbehouden.</span>
+        <a href={`mailto:${brand.email}`}>{brand.email}</a>
       </footer>
-    </section>
+    </>
   );
 }

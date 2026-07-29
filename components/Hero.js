@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { brand, heroLockup } from "@/lib/content";
 import { heroCollage, heroCollageBig } from "@/lib/woody-content";
 import { Smiley } from "@/components/icons";
@@ -11,6 +12,7 @@ import RotatingIcon from "@/components/RotatingIcon";
 export default function Hero({ background = "photo", collageVariant = "default" }) {
   const isBig = background === "collage" && collageVariant === "big";
   const collage = isBig ? heroCollageBig : heroCollage;
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header
@@ -53,10 +55,23 @@ export default function Hero({ background = "photo", collageVariant = "default" 
           ))}
         </div>
         <div className="hero__logo">{brand.name}</div>
-        <a className="hero__contact" href={`mailto:${brand.email}`}>
-          CONTACT
-        </a>
+        <button
+          className={`hero__hamburger${menuOpen ? " is-open" : ""}`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
+
+      {menuOpen && (
+        <div className="hero__menu">
+          <a href={`mailto:${brand.email}`}>{brand.email.toUpperCase()}</a>
+          <a href="#reserveren">RESERVEREN</a>
+        </div>
+      )}
 
       <div className="hero__lockup">
         <Smiley className="hero__icon" />

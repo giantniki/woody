@@ -143,8 +143,7 @@ body.has-woo-cursor * {
   margin: 0 8px;
   opacity: 0.7;
 }
-.hero__socials a:hover,
-.hero__contact:hover {
+.hero__socials a:hover {
   color: var(--orange);
 }
 .hero__logo {
@@ -152,8 +151,55 @@ body.has-woo-cursor * {
   letter-spacing: 0.06em;
   font-size: clamp(20px, 2vw, 30px);
 }
-.hero__contact {
-  letter-spacing: 0.18em;
+
+/* Hamburger menu */
+.hero__hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 30px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.hero__hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.hero__hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hero__hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.hero__hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+.hero__menu {
+  position: absolute;
+  top: 64px;
+  right: 34px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 6px;
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-cond);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  font-size: 14px;
+  color: #fff;
+}
+.hero__menu a:hover {
+  color: var(--orange);
 }
 
 .hero__lockup {
@@ -481,7 +527,6 @@ body.has-woo-cursor * {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  --banner-color: var(--red);
 }
 .closing__image {
   position: absolute;
@@ -509,9 +554,15 @@ body.has-woo-cursor * {
   margin-bottom: 26px;
   padding: 0 20px;
 }
+.closing__bar {
+  --banner-color: var(--red);
+  background: #6d150f;
+  padding: clamp(24px, 5vw, 60px) 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .closing__banner {
-  position: relative;
-  z-index: 2;
   display: block;
   width: min(1200px, 92vw);
   text-align: center;
@@ -526,14 +577,11 @@ body.has-woo-cursor * {
   transition: color 0.25s linear, border-color 0.25s linear;
 }
 .closing__footer {
-  position: absolute;
-  z-index: 2;
-  bottom: 22px;
-  left: 0;
-  right: 0;
-  padding: 0 34px;
+  background: #6d150f;
+  padding: 18px 34px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: #fff;
   font-family: var(--font-cond);
   letter-spacing: 0.06em;
