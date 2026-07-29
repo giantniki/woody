@@ -1,18 +1,25 @@
-import { Bagel_Fat_One, Lora } from "next/font/google";
-// Reuse the exact same woody theme as the third landing — only the hero
-// collage variant differs (see page.js).
+import localFont from "next/font/local";
 import "../taphuys-woody/theme-woody.css";
 
-const bagel = Bagel_Fat_One({
-  weight: "400",
-  subsets: ["latin"],
+// 205TF Exposure — licensed brand font for Woody.
+// [-10] = wide weight → headings / display
+const exposureDisplay = localFont({
+  src: [
+    { path: "./fonts/Exposure-10.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Exposure-10Italic.woff2", weight: "400", style: "italic" },
+  ],
   variable: "--font-woody-display",
+  display: "swap",
 });
 
-const lora = Lora({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
+// [-40] = medium weight → body / paragraphs
+const exposureBody = localFont({
+  src: [
+    { path: "./fonts/Exposure-40.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Exposure-40Italic.woff2", weight: "400", style: "italic" },
+  ],
   variable: "--font-woody-serif",
+  display: "swap",
 });
 
 export const metadata = {
@@ -23,7 +30,7 @@ export const metadata = {
 
 export default function ThemeWoodyLayout({ children }) {
   return (
-    <div className={`theme-woody ${bagel.variable} ${lora.variable}`}>
+    <div className={`theme-woody ${exposureDisplay.variable} ${exposureBody.variable}`}>
       {children}
     </div>
   );
