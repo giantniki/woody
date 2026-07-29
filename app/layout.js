@@ -20,9 +20,9 @@ const bitter = Bitter({
 });
 
 export const metadata = {
-  title: "’t Taphuys — Arnhem",
+  title: "Bar Woody — Arnhem",
   description:
-    "Zelf bier en wijn tappen aan de tapwand. 100 bieren en 80 wijnen, lunch, borrel en diner bij ’t Taphuys Arnhem.",
+    "Zelf bier en wijn tappen aan de tapwand. 100 bieren en 80 wijnen, lunch, borrel en diner bij Bar Woody Arnhem.",
 };
 
 export default function RootLayout({ children }) {

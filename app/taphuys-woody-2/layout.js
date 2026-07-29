@@ -35,9 +35,9 @@ const exposureCond = localFont({
 });
 
 export const metadata = {
-  title: "’t Taphuys — Woody-editie (grote collage)",
+  title: "Bar Woody — Woody-editie (grote collage)",
   description:
-    "De woody-editie van ’t Taphuys met een grotere hero-collage: minder foto's, groter, en eentje die doorloopt in de volgende sectie.",
+    "Bar Woody met een grotere hero-collage: minder foto's, groter, en eentje die doorloopt in de volgende sectie.",
 };
 
 export default function ThemeWoodyLayout({ children }) {

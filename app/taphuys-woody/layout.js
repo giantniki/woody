@@ -14,9 +14,9 @@ const lora = Lora({
 });
 
 export const metadata = {
-  title: "’t Taphuys — Woody-editie",
+  title: "Bar Woody — Woody-editie",
   description:
-    "De eerste landing van ’t Taphuys, opnieuw ingekleurd met de bar woody-huisstijl: kleuren en dansende koppen.",
+    "De eerste landing van Bar Woody, opnieuw ingekleurd met de bar woody-huisstijl: kleuren en dansende koppen.",
 };
 
 export default function ThemeWoodyLayout({ children }) {
