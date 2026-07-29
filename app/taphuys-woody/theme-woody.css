@@ -67,6 +67,24 @@
   z-index: 3;
 }
 
+/* ---- full-bleed single hero image (replaces collage) */
+.theme-woody .hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.theme-woody .hero--collage .hero__image + .hero__nav,
+.theme-woody .hero--collage .hero__image + .hero__lockup,
+.theme-woody .hero--collage .hero__image ~ .hero__lockup,
+.theme-woody .hero--collage .hero__image ~ .hero__nav,
+.theme-woody .hero--collage .hero__image ~ .hero__reserve,
+.theme-woody .hero--collage .hero__image ~ .hero__email {
+  z-index: 3;
+}
+
 /* ---- "bar woody" stacked logo (replaces the Smiley/VAN/RotatingIcon lockup) */
 .theme-woody .hero__wd-logo {
   margin: 0;

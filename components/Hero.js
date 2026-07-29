@@ -9,7 +9,7 @@ import RotatingIcon from "@/components/RotatingIcon";
 // background: "photo" (landing 1) | "collage" (burgundy + scattered photos, landing 2/3)
 // collageVariant: "default" (8 scattered tiles) | "big" (fewer/larger tiles, one
 //                 bleeds down into the next section — see heroCollageBig).
-export default function Hero({ background = "photo", collageVariant = "default", logoVariant = "default" }) {
+export default function Hero({ background = "photo", collageVariant = "default", logoVariant = "default", heroImage = null }) {
   const isBig = background === "collage" && collageVariant === "big";
   const collage = isBig ? heroCollageBig : heroCollage;
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,7 +19,9 @@ export default function Hero({ background = "photo", collageVariant = "default",
     <header
       className={`hero${background === "collage" ? ` hero--collage${isBig ? " hero--collage-big" : ""}` : ""}`}
     >
-      {background === "collage" ? (
+      {heroImage ? (
+        <div className="hero__image" style={{ backgroundImage: `url(${heroImage})` }} />
+      ) : background === "collage" ? (
         <div className="hero__collage" aria-hidden="true">
           {collage.map((p, i) => (
             <div
