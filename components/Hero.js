@@ -9,10 +9,11 @@ import RotatingIcon from "@/components/RotatingIcon";
 // background: "photo" (landing 1) | "collage" (burgundy + scattered photos, landing 2/3)
 // collageVariant: "default" (8 scattered tiles) | "big" (fewer/larger tiles, one
 //                 bleeds down into the next section — see heroCollageBig).
-export default function Hero({ background = "photo", collageVariant = "default" }) {
+export default function Hero({ background = "photo", collageVariant = "default", logoVariant = "default" }) {
   const isBig = background === "collage" && collageVariant === "big";
   const collage = isBig ? heroCollageBig : heroCollage;
   const [menuOpen, setMenuOpen] = useState(false);
+  const isWoodyLogo = logoVariant === "woody";
 
   return (
     <header
@@ -54,7 +55,7 @@ export default function Hero({ background = "photo", collageVariant = "default" 
             </span>
           ))}
         </div>
-        <div className="hero__logo">{brand.name}</div>
+        <div className="hero__logo">{isWoodyLogo ? "woody" : brand.name}</div>
         <button
           className={`hero__hamburger${menuOpen ? " is-open" : ""}`}
           onClick={() => setMenuOpen((v) => !v)}
@@ -74,9 +75,18 @@ export default function Hero({ background = "photo", collageVariant = "default" 
       )}
 
       <div className="hero__lockup">
-        <Smiley className="hero__icon" />
-        <span className="hero__connector">{heroLockup.connector}</span>
-        <RotatingIcon className="hero__icon hero__icon--rotating" />
+        {isWoodyLogo ? (
+          <h1 className="hero__wd-logo">
+            <span className="hero__wd-logo__top">bar</span>
+            <span className="hero__wd-logo__main">woody</span>
+          </h1>
+        ) : (
+          <>
+            <Smiley className="hero__icon" />
+            <span className="hero__connector">{heroLockup.connector}</span>
+            <RotatingIcon className="hero__icon hero__icon--rotating" />
+          </>
+        )}
       </div>
 
       <a className="hero__reserve" href="#reserveren">

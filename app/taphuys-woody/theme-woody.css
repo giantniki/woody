@@ -67,6 +67,30 @@
   z-index: 3;
 }
 
+/* ---- "bar woody" stacked logo (replaces the Smiley/VAN/RotatingIcon lockup) */
+.theme-woody .hero__wd-logo {
+  margin: 0;
+  color: var(--woody-cream);
+  text-align: center;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+}
+.theme-woody .hero__wd-logo__top,
+.theme-woody .hero__wd-logo__main {
+  display: block;
+  font-family: var(--font-woody-display), cursive;
+  text-transform: lowercase;
+  font-weight: 400;
+}
+.theme-woody .hero__wd-logo__top {
+  font-size: clamp(1.3rem, 2.8vw, 2.6rem);
+  transform: translateX(-1.15em);
+  margin-bottom: -0.14em;
+}
+.theme-woody .hero__wd-logo__main {
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: 0.78;
+}
+
 /* ---- "big" collage variant: fewer/larger photos, one bleeds into next section.
    We let the hero overflow (so the crossing tile can extend past the bottom),
    and lift the whole hero above the following .showcase so the bleed paints

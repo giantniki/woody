@@ -14,7 +14,7 @@ export default function TaphuysWoody2Page() {
   return (
     <main>
       <Cursor variant="woody" />
-      <Hero background="collage" collageVariant="big" />
+      <Hero background="collage" collageVariant="big" logoVariant="woody" />
       <ParallaxShowcase dancing />
       <InfoSection dancing />
       <ClosingBanner dancing colors={WOODY_BANNER_COLORS} />
