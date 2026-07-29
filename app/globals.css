@@ -367,6 +367,9 @@ body.has-woo-cursor * {
   background: var(--cream);
   padding: 6px 14px;
 }
+.triplet__caption p + p {
+  margin-top: 0.6em;
+}
 
 /* ------------------------------------------------------------------ info */
 .info {

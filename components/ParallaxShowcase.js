@@ -80,9 +80,11 @@ export default function ParallaxShowcase({ dancing = false }) {
             </h2>
           </div>
 
-          <p className="triplet__caption" data-speed="0.06">
-            {item.caption}
-          </p>
+          <div className="triplet__caption" data-speed="0.06">
+            {item.caption.split("\n\n").map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
         </article>
       ))}
     </section>
