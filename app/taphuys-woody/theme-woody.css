@@ -18,10 +18,17 @@
   --orange: #6d150f;
   --font-display: var(--font-woody-display), cursive;
   --font-serif: var(--font-woody-serif), Georgia, serif;
+  --font-cond: var(--font-woody-cond), "Barlow Condensed", system-ui, sans-serif;
 
   min-height: 100vh;
   background: var(--woody-cream);
   color: var(--woody-red);
+}
+
+/* Exposure achieves hierarchy through WIDTH (-10/-40/-90), not weight.
+   Neutralize fake browser-bold so nothing looks synthetically thickened. */
+.theme-woody * {
+  font-weight: 400 !important;
 }
 
 /* --------------------------------------------------------------- cursor */

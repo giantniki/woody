@@ -2,7 +2,9 @@ import localFont from "next/font/local";
 import "../taphuys-woody/theme-woody.css";
 
 // 205TF Exposure — licensed brand font for Woody.
-// [-10] = wide weight → headings / display
+// Three widths: [-10] wide, [-40] medium, [-90] condensed.
+
+// [-10] wide → headings / display (--font-display)
 const exposureDisplay = localFont({
   src: [
     { path: "./fonts/Exposure-10.woff2", weight: "400", style: "normal" },
@@ -12,13 +14,23 @@ const exposureDisplay = localFont({
   display: "swap",
 });
 
-// [-40] = medium weight → body / paragraphs
+// [-40] medium → body / paragraphs (--font-serif)
 const exposureBody = localFont({
   src: [
     { path: "./fonts/Exposure-40.woff2", weight: "400", style: "normal" },
     { path: "./fonts/Exposure-40Italic.woff2", weight: "400", style: "italic" },
   ],
   variable: "--font-woody-serif",
+  display: "swap",
+});
+
+// [-90] condensed → labels, buttons, location info (--font-cond)
+const exposureCond = localFont({
+  src: [
+    { path: "./fonts/Exposure-90.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Exposure-90Italic.woff2", weight: "400", style: "italic" },
+  ],
+  variable: "--font-woody-cond",
   display: "swap",
 });
 
@@ -30,7 +42,7 @@ export const metadata = {
 
 export default function ThemeWoodyLayout({ children }) {
   return (
-    <div className={`theme-woody ${exposureDisplay.variable} ${exposureBody.variable}`}>
+    <div className={`theme-woody ${exposureDisplay.variable} ${exposureBody.variable} ${exposureCond.variable}`}>
       {children}
     </div>
   );
