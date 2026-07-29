@@ -100,7 +100,7 @@ body.has-woo-cursor * {
 .hero__bg {
   position: absolute;
   inset: 0;
-  background: url("/img/taphuys-12.jpg") center/cover no-repeat;
+  background: url("/img/sfeer-kegs.jpg") center/cover no-repeat;
   transform: scale(1.05);
   animation: heroZoom 18s ease-in-out infinite alternate;
 }
@@ -283,31 +283,41 @@ body.has-woo-cursor * {
   background-position: center;
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
 }
+/* Standardised containers: a portrait panel (back) + a square panel (front),
+   identical shape & size on every triplet. Fixed aspect-ratios keep the shapes
+   constant at any viewport (no more vh-dependent stretching); equal widths keep
+   the pair balanced. The two straddle the centre line and overlap ~14%, with a
+   consistent vertical stagger — mirrored between the two triplet directions. */
 .layer--back {
-  width: 54%;
-  height: 64vh;
+  width: 34%;
+  max-width: 520px;
+  aspect-ratio: 4 / 5;
   z-index: 1;
 }
 .layer--front {
-  width: 46%;
-  height: 48vh;
+  width: 34%;
+  max-width: 520px;
+  aspect-ratio: 1 / 1;
   z-index: 2;
 }
-/* Outer offsets pulled inward so the two photos overlap ~12% over the centre. */
 .triplet--right .layer--back {
-  right: 5%;
-  top: 6%;
+  left: 50%;
+  margin-left: -7%;
+  top: 8%;
 }
 .triplet--right .layer--front {
-  left: 7%;
+  right: 50%;
+  margin-right: -7%;
   bottom: 8%;
 }
 .triplet--left .layer--back {
-  left: 5%;
-  top: 6%;
+  right: 50%;
+  margin-right: -7%;
+  top: 8%;
 }
 .triplet--left .layer--front {
-  right: 7%;
+  left: 50%;
+  margin-left: -7%;
   bottom: 8%;
 }
 
@@ -604,12 +614,38 @@ body.has-woo-cursor * {
     min-height: 92vh;
   }
   .layer--back {
-    width: 78%;
-    height: 44vh;
+    width: 64%;
+    max-width: none;
+    aspect-ratio: 4 / 5;
   }
   .layer--front {
     width: 56%;
-    height: 34vh;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+  }
+  .triplet--right .layer--back {
+    left: 5%;
+    right: auto;
+    margin: 0;
+    top: 3%;
+  }
+  .triplet--right .layer--front {
+    right: 5%;
+    left: auto;
+    margin: 0;
+    bottom: 3%;
+  }
+  .triplet--left .layer--back {
+    right: 5%;
+    left: auto;
+    margin: 0;
+    top: 3%;
+  }
+  .triplet--left .layer--front {
+    left: 5%;
+    right: auto;
+    margin: 0;
+    bottom: 3%;
   }
   .lockup-text {
     -webkit-text-stroke: 1.5px var(--ink);
