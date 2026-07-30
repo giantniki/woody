@@ -605,17 +605,18 @@ body.has-woo-cursor * {
   transition: color 0.25s linear, border-color 0.25s linear;
 }
 .closing__footer {
-  background: #6d150f;
+  background: var(--woody-cream, #f1f0cd);
   padding: 18px 34px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
+  color: #111;
   font-family: var(--font-cond);
   letter-spacing: 0.06em;
   font-size: 13px;
 }
 .closing__footer a {
+  color: #111;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
