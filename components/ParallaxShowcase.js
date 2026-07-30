@@ -20,8 +20,9 @@ export default function ParallaxShowcase({ dancing = false }) {
       const backRect = back.getBoundingClientRect();
       const tripletRect = triplet.getBoundingClientRect();
 
-      // Position caption's top edge touching the back photo's bottom edge
-      const bottomOfBack = backRect.bottom - tripletRect.top;
+      // Position caption below the back photo with a small gap
+      const gap = 16; // px gap between photo bottom and caption top
+      const bottomOfBack = backRect.bottom - tripletRect.top + gap;
       caption.style.top = `${bottomOfBack}px`;
     }
   }, []);
