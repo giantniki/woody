@@ -134,12 +134,16 @@
 }
 
 /* ------------------------------------------------------- showcase lockups */
-/* Flat burgundy — same style as the "Zelf tappen in drie stappen" H1. */
+/* Cream lockup words, burgundy caption background — swapped from default. */
 .theme-woody .lockup-text,
 .theme-woody .triplet--left .lockup-text {
-  color: var(--woody-red);
+  color: var(--woody-cream);
   -webkit-text-stroke: 0;
   text-stroke: 0;
+}
+.theme-woody .triplet__caption {
+  background: var(--woody-red);
+  color: var(--woody-cream);
 }
 
 /* ------------------------------------------------------------ info block */
