@@ -15,15 +15,8 @@ export default function InfoSection({ dancing = false }) {
         <h2 className="steps__title">
           <H text={steps.title} />
         </h2>
-        <ol className="steps__list">
-          {steps.items.map((s) => (
-            <li className="step" key={s.n}>
-              <span className="step__n">{s.n}</span>
-              <h3 className="step__title">{s.title}</h3>
-              <p className="step__body">{s.body}</p>
-            </li>
-          ))}
-        </ol>
+        <p className="steps__body">{steps.body}</p>
+        <a className="steps__cta" href="#solliciteer">{steps.cta}</a>
       </div>
 
       <div className="visit">
