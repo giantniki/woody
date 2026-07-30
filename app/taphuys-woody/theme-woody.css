@@ -202,6 +202,26 @@
 }
 
 /* --------------------------------------------------------------- closing */
+/* Closing section: cream background instead of dark image */
+.theme-woody .closing {
+  background: var(--woody-cream);
+}
+.theme-woody .closing__image {
+  display: none;
+}
+.theme-woody .closing__note {
+  color: var(--woody-red);
+}
+/* "avond" label above the RESERVEREN banner */
+.theme-woody .closing__pre-label {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: var(--woody-cream);
+  text-transform: lowercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
 /* banner is puffy + dancing; colour cycles through the woody palette (set in
    the page). Give it a touch more presence on the dark image. */
 .theme-woody .closing__banner {

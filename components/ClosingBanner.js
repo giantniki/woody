@@ -38,6 +38,7 @@ export default function ClosingBanner({ dancing = false, colors = DEFAULT_COLORS
         <div className="closing__note">{closing.bannerNote}</div>
       </section>
       <section className="closing__bar" ref={bannerRef}>
+        <span className="closing__pre-label">{closing.preLabel}</span>
         <a className="closing__banner" href={`mailto:${brand.email}`}>
           {dancing ? (
             <DancingText text={closing.bannerLabel} intensity={1.5} />
