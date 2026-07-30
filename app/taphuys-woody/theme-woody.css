@@ -142,7 +142,7 @@
   color: var(--woody-cream);
   -webkit-text-stroke: 0;
   text-stroke: 0;
-  font-size: clamp(2.9rem, 10.2vw, 9.35rem);
+  font-size: clamp(2.6rem, 9.2vw, 8.4rem);
 }
 /* Caption sits directly below the back photo; JS sets top dynamically */
 .theme-woody .triplet__caption {
