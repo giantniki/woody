@@ -5,7 +5,7 @@ import InfoSection from "@/components/InfoSection";
 import ClosingBanner from "@/components/ClosingBanner";
 
 // Woody palette for the colour-cycling closing banner.
-const WOODY_BANNER_COLORS = ["#f2c00d", "#f1f0cd", "#e0662a", "#c94f3a", "#6d150f"];
+const WOODY_BANNER_COLORS = ["#e63946", "#111111", "#6d150f"];
 
 // Fourth landing: same woody re-skin as /taphuys-woody, but the hero collage is
 // the "big" variant — fewer, larger photos, with one tile bleeding down into
