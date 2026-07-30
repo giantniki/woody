@@ -180,15 +180,6 @@
   line-height: 1.5;
   opacity: 0.85;
 }
-/* WERKEN BIJ WOODY? — same style as DE STADSHERBURG VAN NU */
-.theme-woody .steps__title {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.4vw, 3rem);
-  line-height: 1.05;
-  text-transform: uppercase;
-  max-width: 900px;
-  margin: 0 auto 18px;
-}
 .theme-woody .steps__cta {
   display: inline-block;
   background: var(--woody-yellow);
