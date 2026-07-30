@@ -257,7 +257,6 @@
    + always one line */
 .theme-woody .closing__banner {
   white-space: nowrap;
-  font-size: clamp(2.5rem, 10vw, 11rem);
 }
 
 /* dancing letters keep the block line layout inside these headings */
