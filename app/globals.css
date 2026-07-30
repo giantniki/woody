@@ -152,7 +152,7 @@ body.has-woo-cursor * {
   font-size: clamp(20px, 2vw, 30px);
 }
 
-/* Hamburger menu */
+/* Hamburger menu — full-screen burgundy overlay */
 .hero__hamburger {
   display: flex;
   flex-direction: column;
@@ -164,6 +164,7 @@ body.has-woo-cursor * {
   border: none;
   cursor: pointer;
   padding: 0;
+  z-index: 20;
 }
 .hero__hamburger span {
   display: block;
@@ -182,24 +183,29 @@ body.has-woo-cursor * {
   transform: translateY(-7px) rotate(-45deg);
 }
 .hero__menu {
-  position: absolute;
-  top: 64px;
-  right: 34px;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 6px;
-  padding: 18px 24px;
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  background: var(--woody-red, #6d150f);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  font-family: var(--font-cond);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  font-size: 14px;
-  color: #fff;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--woody-cream, #f1f0cd);
+  text-transform: uppercase;
+}
+.hero__menu a {
+  color: var(--woody-cream, #f1f0cd);
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 .hero__menu a:hover {
-  color: var(--orange);
+  color: var(--woody-yellow, #f2c00d);
 }
 
 .hero__lockup {
@@ -230,21 +236,25 @@ body.has-woo-cursor * {
 
 .hero__reserve {
   position: absolute;
-  left: 34px;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 34px;
-  background: var(--red);
-  color: #fff;
-  font-family: var(--font-cond);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  font-size: 19px;
-  padding: 16px 30px;
-  border-radius: 4px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  background: var(--woody-yellow, #f2c00d);
+  color: var(--woody-red, #6d150f);
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 .hero__reserve:hover {
-  background: #b23a2e;
-  transform: translateY(-2px);
+  background: #d9ad0a;
+  transform: translateX(-50%) translateY(-2px);
 }
 .hero__email {
   position: absolute;
