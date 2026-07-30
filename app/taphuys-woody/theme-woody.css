@@ -213,8 +213,8 @@
 .theme-woody .closing__image::after {
   background: rgba(0, 0, 0, 0.25);
 }
-/* "Er is hier altijd plek. Schuif aan." — same size as intro heading */
-.theme-woody .closing__pre-label {
+/* "Er is hier altijd plek. Schuif aan." text in closing photo section */
+.theme-woody .closing .closing__pre-label {
   position: relative;
   z-index: 2;
   color: var(--woody-cream);
@@ -227,12 +227,25 @@
   margin: 0 auto;
   padding: 0 20px;
 }
-.theme-woody .closing__pre-label span {
+.theme-woody .closing .closing__pre-label span {
   display: block;
 }
-/* "avond" label above the RESERVEREN banner — hidden in closing section */
-.theme-woody .closing__pre-label + .closing__pre-label {
-  display: none;
+/* Closing bar: cream background */
+.theme-woody .closing__bar {
+  background: var(--woody-cream) !important;
+}
+/* "Er is hier altijd plek. Schuif aan." above RESERVEREN button */
+.theme-woody .closing__bar .closing__pre-label {
+  color: var(--woody-red);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.4vw, 3rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.theme-woody .closing__bar .closing__pre-label span {
+  display: block;
 }
 /* banner is puffy + dancing; colour cycles through the woody palette (set in
    the page). Give it a touch more presence on the dark image. */
