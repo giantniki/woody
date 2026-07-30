@@ -32,11 +32,6 @@ export default function ClosingBanner({ dancing = false, colors = DEFAULT_COLORS
           className="closing__image"
           style={{ backgroundImage: `url(${closing.image})` }}
         />
-        <div className="closing__pre-label">
-          {closing.preLabel.split("\n").map((line, i) => (
-            <span key={i}>{line}</span>
-          ))}
-        </div>
       </section>
       <section className="closing__bar" ref={bannerRef}>
         <div className="closing__pre-label">
