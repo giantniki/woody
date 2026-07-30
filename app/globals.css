@@ -587,6 +587,7 @@ body.has-woo-cursor * {
   background: #6d150f;
   padding: clamp(24px, 5vw, 60px) 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
