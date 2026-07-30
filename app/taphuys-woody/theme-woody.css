@@ -197,6 +197,10 @@
 .theme-woody .steps__cta:hover {
   background: #d9ad0a;
 }
+/* More space between Solliciteer nu and HIER IS WOODY */
+.theme-woody .steps {
+  margin-bottom: 10vh;
+}
 .theme-woody .visit__links a:hover {
   color: var(--woody-yellow);
 }
