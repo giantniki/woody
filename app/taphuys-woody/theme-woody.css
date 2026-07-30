@@ -133,7 +133,9 @@
   background: #d9ad0a;
 }
 
-/* ------------------------------------------------------- showcase lockups */
+.theme-woody .showcase {
+  background: var(--woody-red);
+}
 /* Cream lockup words, burgundy caption background — swapped from default. */
 .theme-woody .lockup-text,
 .theme-woody .triplet--left .lockup-text {
