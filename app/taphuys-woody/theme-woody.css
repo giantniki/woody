@@ -247,10 +247,10 @@
 .theme-woody .closing__bar .closing__pre-label span {
   display: block;
 }
-/* banner is puffy + dancing; colour cycles through the woody palette (set in
-   the page). Give it a touch more presence on the dark image. */
+/* banner is puffy + dancing; colour cycles through red, black, burgundy */
 .theme-woody .closing__banner {
   border-width: 7px;
+  font-size: clamp(2.13rem, 8.5vw, 9.35rem);
 }
 
 /* "Reserveren" closing banner: boldest width ([-10] via --font-display)

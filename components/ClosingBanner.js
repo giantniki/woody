@@ -7,11 +7,8 @@ import DancingText from "@/components/DancingText";
 // Colours the banner border + text cycle through, every 300ms.
 const DEFAULT_COLORS = [
   "#e63946",
-  "#f4a300",
-  "#2a9d8f",
-  "#3d5afe",
   "#111111",
-  "#c1121f",
+  "#6d150f",
 ];
 
 export default function ClosingBanner({ dancing = false, colors = DEFAULT_COLORS }) {
