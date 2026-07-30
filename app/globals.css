@@ -130,6 +130,10 @@ body.has-woo-cursor * {
 }
 
 .hero__nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,6 +142,8 @@ body.has-woo-cursor * {
   font-weight: 600;
   letter-spacing: 0.14em;
   font-size: 15px;
+  z-index: 10;
+  background: linear-gradient(to bottom, var(--woody-red, #6d150f) 60%, transparent);
 }
 .hero__socials .sep {
   margin: 0 8px;
@@ -157,9 +163,9 @@ body.has-woo-cursor * {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
-  width: 38px;
-  height: 30px;
+  gap: 7px;
+  width: 46px;
+  height: 36px;
   background: none;
   border: none;
   cursor: pointer;
@@ -168,7 +174,7 @@ body.has-woo-cursor * {
 }
 .hero__hamburger span {
   display: block;
-  height: 3px;
+  height: 5px;
   width: 100%;
   background: #fff;
   border-radius: 2px;
@@ -236,7 +242,7 @@ body.has-woo-cursor * {
 }
 
 .hero__reserve {
-  position: absolute;
+  position: fixed;
   right: 34px;
   bottom: 34px;
   background: var(--woody-yellow, #f2c00d);
