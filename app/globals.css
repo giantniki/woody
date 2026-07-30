@@ -143,7 +143,6 @@ body.has-woo-cursor * {
   letter-spacing: 0.14em;
   font-size: 15px;
   z-index: 10;
-  background: linear-gradient(to bottom, var(--woody-red, #6d150f) 60%, transparent);
 }
 .hero__socials .sep {
   margin: 0 8px;
