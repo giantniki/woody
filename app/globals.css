@@ -157,9 +157,9 @@ body.has-woo-cursor * {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
-  width: 30px;
-  height: 24px;
+  gap: 6px;
+  width: 38px;
+  height: 30px;
   background: none;
   border: none;
   cursor: pointer;
@@ -168,9 +168,10 @@ body.has-woo-cursor * {
 }
 .hero__hamburger span {
   display: block;
-  height: 2px;
+  height: 3px;
   width: 100%;
   background: #fff;
+  border-radius: 2px;
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 .hero__hamburger.is-open span:nth-child(1) {
@@ -236,8 +237,7 @@ body.has-woo-cursor * {
 
 .hero__reserve {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 34px;
   bottom: 34px;
   background: var(--woody-yellow, #f2c00d);
   color: var(--woody-red, #6d150f);
@@ -254,7 +254,7 @@ body.has-woo-cursor * {
 }
 .hero__reserve:hover {
   background: #d9ad0a;
-  transform: translateX(-50%) translateY(-2px);
+  transform: translateY(-2px);
 }
 .hero__email {
   position: absolute;

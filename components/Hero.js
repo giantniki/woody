@@ -94,9 +94,6 @@ export default function Hero({ background = "photo", collageVariant = "default",
       <a className="hero__reserve" href="#reserveren">
         {brand.reserveLabel}
       </a>
-      <a className="hero__email" href={`mailto:${brand.email}`}>
-        {brand.email.toUpperCase()}
-      </a>
     </header>
   );
 }
