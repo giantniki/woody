@@ -403,6 +403,7 @@ body.has-woo-cursor * {
 .info__intro-sub {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
   max-width: 620px;
   margin: 0 auto 8vh;
   opacity: 0.85;
