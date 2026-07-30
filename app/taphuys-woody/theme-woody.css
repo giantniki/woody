@@ -156,14 +156,14 @@
   right: auto;
   transform: none;
 }
-/* Caption below the right photo (back layer) in triplet--right */
+/* Caption under the right photo, right-aligned with photo's outer edge */
 .theme-woody .triplet--right .triplet__caption {
-  left: 47.5%;
+  right: 18.5%;
   top: 56%;
 }
-/* Caption below the left photo (back layer) in triplet--left */
+/* Caption under the left photo, left-aligned with photo's outer edge */
 .theme-woody .triplet--left .triplet__caption {
-  left: 16%;
+  left: 18.5%;
   top: 56%;
 }
 
