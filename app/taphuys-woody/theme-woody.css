@@ -144,6 +144,7 @@
   text-stroke: 0;
   font-size: clamp(2.9rem, 10.2vw, 9.35rem);
 }
+/* Caption sits directly below the back photo; JS sets top dynamically */
 .theme-woody .triplet__caption {
   background: var(--woody-red);
   color: var(--woody-cream);
@@ -152,19 +153,17 @@
   max-width: 420px;
   z-index: 0;
   bottom: auto;
-  left: auto;
-  right: auto;
   transform: none;
 }
-/* Caption under the right photo, right-aligned with photo's outer edge */
+/* Right-side caption: right edge aligns with back photo's right edge */
 .theme-woody .triplet--right .triplet__caption {
   right: 18.5%;
-  top: 56%;
+  left: auto;
 }
-/* Caption under the left photo, left-aligned with photo's outer edge */
+/* Left-side caption: left edge aligns with back photo's left edge */
 .theme-woody .triplet--left .triplet__caption {
   left: 18.5%;
-  top: 56%;
+  right: auto;
 }
 
 /* ------------------------------------------------------------ info block */

@@ -1,11 +1,30 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { showcase } from "@/lib/content";
 import DancingText from "@/components/DancingText";
 
 export default function ParallaxShowcase({ dancing = false }) {
   const rootRef = useRef(null);
+
+  const positionCaptions = useCallback(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const triplets = root.querySelectorAll(".triplet");
+    for (const triplet of triplets) {
+      const back = triplet.querySelector(".layer--back");
+      const caption = triplet.querySelector(".triplet__caption");
+      if (!back || !caption) continue;
+
+      const backRect = back.getBoundingClientRect();
+      const tripletRect = triplet.getBoundingClientRect();
+
+      // Position caption's top edge touching the back photo's bottom edge
+      const bottomOfBack = backRect.bottom - tripletRect.top;
+      caption.style.top = `${bottomOfBack}px`;
+    }
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -34,15 +53,20 @@ export default function ParallaxShowcase({ dancing = false }) {
       if (raf == null) raf = requestAnimationFrame(update);
     };
 
+    // Position captions on load and resize
+    positionCaptions();
+    window.addEventListener("resize", positionCaptions);
+
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", positionCaptions);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [positionCaptions]);
 
   return (
     <section className="showcase" ref={rootRef} aria-label="Ontdek onze formule">
