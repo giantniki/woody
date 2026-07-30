@@ -147,6 +147,9 @@
 .theme-woody .triplet__caption {
   background: var(--woody-red);
   color: var(--woody-cream);
+  text-align: left;
+  font-size: 22px;
+  max-width: 420px;
 }
 
 /* ------------------------------------------------------------ info block */
