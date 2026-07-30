@@ -21,8 +21,8 @@
   --font-cond: var(--font-woody-cond), "Barlow Condensed", system-ui, sans-serif;
 
   min-height: 100vh;
-  background: var(--woody-cream);
-  color: var(--woody-red);
+  background: var(--woody-red);
+  color: var(--woody-cream);
 }
 
 /* Exposure achieves hierarchy through WIDTH (-10/-40/-90), not weight.
