@@ -150,6 +150,21 @@
   text-align: left;
   font-size: 22px;
   max-width: 420px;
+  z-index: 0;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  transform: none;
+}
+/* Caption below the right photo (back layer) in triplet--right */
+.theme-woody .triplet--right .triplet__caption {
+  left: 47.5%;
+  top: 56%;
+}
+/* Caption below the left photo (back layer) in triplet--left */
+.theme-woody .triplet--left .triplet__caption {
+  left: 16%;
+  top: 56%;
 }
 
 /* ------------------------------------------------------------ info block */
