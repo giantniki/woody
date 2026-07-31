@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { brand, locations } from "@/lib/content";
-import { v2NavLinks } from "@/lib/woody-v2-content";
+import { v2NavLinks, v2Brand } from "@/lib/woody-v2-content";
+
+const instagram = brand.socials[0];
 
 // Sticky nav-menu (the "menu" Niki means): fixed logo + hamburger that condenses
 // on scroll, opening a full-screen burgundy overlay with big Exposure links —
@@ -45,8 +47,16 @@ export default function V2Nav({ solid = false }) {
   return (
     <>
       <header className={barClass}>
+        <a
+          className="v2-nav__ig"
+          href={instagram.href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {instagram.label}
+        </a>
         <a className="v2-nav__logo" href="/woody-v2" onClick={() => setOpen(false)}>
-          {brand.name}
+          {v2Brand}
         </a>
         <button
           className={`v2-nav__burger${open ? " is-open" : ""}`}

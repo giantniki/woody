@@ -1,34 +1,22 @@
 "use client";
 
-import { heroCollageBig } from "@/lib/woody-content";
 import { heroLockup } from "@/lib/content";
+import { v2HeroPhoto } from "@/lib/woody-v2-content";
 import { Smiley } from "@/components/icons";
 import RotatingIcon from "@/components/RotatingIcon";
 
-// Cleaned-up hero (Niki's brief): the taphuys-woody-2 "big collage" hero, but
-// WITHOUT the in-hero nav / INSTAGRAM / email / bottom-left reserve button —
-// the sticky V2Nav (logo + hamburger) and the floating V2BookButton take over.
-// Reuses the shared .hero* classes so globals.css + theme-woody.css style it.
+// Hero with a single full-bleed background photo (like /taphuys-woody-2), a soft
+// dark gradient for legibility, and the centred lockup (smiley · VAN · pig).
+// The navbar (INSTAGRAM · logo · hamburger) lives in the sticky V2Nav on top.
 export default function V2Hero() {
   return (
-    <header className="hero hero--collage hero--collage-big v2-hero">
-      <div className="hero__collage" aria-hidden="true">
-        {heroCollageBig.map((p, i) => (
-          <div
-            key={i}
-            className={`hero__tile${p.cross ? " hero__tile--cross" : ""}`}
-            style={{
-              top: p.top,
-              left: p.left,
-              right: p.right,
-              width: p.w,
-              height: p.h,
-              transform: `rotate(${p.r}deg)`,
-              backgroundImage: `url(${p.src})`,
-            }}
-          />
-        ))}
-      </div>
+    <header className="hero v2-hero">
+      <div
+        className="v2-hero__bg"
+        style={{ backgroundImage: `url(${v2HeroPhoto})` }}
+        aria-hidden="true"
+      />
+      <div className="v2-hero__overlay" aria-hidden="true" />
 
       <div className="hero__lockup">
         <Smiley className="hero__icon" />
