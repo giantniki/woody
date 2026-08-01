@@ -103,6 +103,34 @@
   background: var(--woody-cream);
 }
 
+/* overlay = pages with a full-bleed photo hero: bar stays transparent with cream
+   marks (no solid-on-scroll flip) so the photo reads to the top edge. */
+.v2 .v2-nav--overlay {
+  background: transparent;
+  box-shadow: none;
+}
+.v2 .v2-nav--overlay .v2-nav__logo,
+.v2 .v2-nav--overlay .v2-nav__ig {
+  color: var(--woody-cream);
+}
+.v2 .v2-nav--overlay .v2-nav__burger span {
+  background: var(--woody-cream);
+}
+/* full-width legibility scrim behind the transparent nav — keeps the cream
+   marks readable whether they sit over a photo or the cream page. Travels with
+   the fixed nav, so it works on every editorial page. */
+.v2 .v2-nav--overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, rgba(20, 4, 3, 0.5), rgba(20, 4, 3, 0));
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* ------------------------------------------------ hero: single photo bg */
 .v2 .v2-hero__bg {
   position: absolute;
@@ -166,8 +194,8 @@
 .v2 .v2-overlay__links a {
   width: fit-content;
   font-family: var(--font-woody-display), cursive;
-  font-size: clamp(2.6rem, 9vw, 7rem);
-  line-height: 0.98;
+  font-size: clamp(1.3rem, 3.6vw, 2.8rem); /* ~30% smaller than before */
+  line-height: 1.02;
   text-transform: lowercase;
   color: var(--woody-cream);
   opacity: 0;
@@ -182,34 +210,50 @@
   color: var(--woody-yellow);
 }
 
+/* footer of the overlay: three columns on the same burgundy background */
 .v2 .v2-overlay__foot {
   margin-top: auto;
-  padding-top: 6vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px;
+  padding-top: clamp(36px, 6vh, 72px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: clamp(24px, 4vw, 60px);
+  align-items: start;
   font-family: var(--font-woody-cond), sans-serif;
+}
+.v2 .v2-overlay__col-label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 14px;
 }
 .v2 .v2-overlay__mail {
   color: var(--woody-yellow);
   font-size: clamp(16px, 1.6vw, 20px);
 }
-.v2 .v2-overlay__locs {
+.v2 .v2-overlay__socials {
   display: flex;
-  flex-wrap: wrap;
-  gap: clamp(18px, 3vw, 40px);
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+}
+.v2 .v2-overlay__socials a:hover {
+  color: var(--woody-yellow);
+}
+.v2 .v2-overlay__locs {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.85;
 }
 .v2 .v2-overlay__locs li {
   display: flex;
   flex-direction: column;
-  font-size: 13px;
-  line-height: 1.4;
-  opacity: 0.82;
 }
 .v2 .v2-overlay__locs strong {
   font-size: 15px;
@@ -380,10 +424,260 @@
     grid-template-columns: 1fr;
   }
   .v2 .v2-overlay__links a {
-    font-size: clamp(2.3rem, 13vw, 3.6rem);
+    font-size: clamp(1.2rem, 5.6vw, 2rem); /* ~30% smaller than before */
   }
   .v2 .v2-overlay__foot {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* ============================================ editorial pages (text | photos) */
+.v2 .v2-ed {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: start;
+  position: relative;
+}
+/* text column: padding + readability cap. (Moved here from .v2-ed so the photo
+   column can break to the screen edge.) */
+.v2 .v2-ed__text {
+  padding: clamp(96px, 15vh, 168px) clamp(24px, 5vw, 84px) 14vh;
+  max-width: 760px;
+}
+.v2 .v2-ed__title {
+  margin: 0 0 clamp(18px, 4vh, 40px);
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(3rem, 11vw, 8.5rem);
+  line-height: 0.82;
+  text-transform: lowercase;
+  color: var(--woody-red);
+}
+.v2 .v2-ed__intro p {
+  margin: 0 0 15px;
+  font-family: var(--font-woody-serif), Georgia, serif;
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.5;
+}
+.v2 .v2-ed__intro p:first-child {
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.4rem, 2.7vw, 2.3rem);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.v2 .v2-ed__section {
+  margin-top: clamp(26px, 5vh, 50px);
+}
+.v2 .v2-ed__heading {
+  margin: 0 0 12px;
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  line-height: 0.95;
+  text-transform: lowercase;
+  color: var(--woody-red);
+}
+.v2 .v2-ed__body p {
+  margin: 0 0 14px;
+  font-family: var(--font-woody-serif), Georgia, serif;
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.55;
+}
+.v2 .v2-ed__list {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+.v2 .v2-ed__list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 9px;
+  font-family: var(--font-woody-serif), Georgia, serif;
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.4;
+}
+.v2 .v2-ed__list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--woody-red);
+}
+.v2 .v2-ed__stat {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 12px;
+}
+.v2 .v2-ed__stat-num {
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 0.85;
+  color: var(--woody-yellow);
+  -webkit-text-stroke: 1.5px var(--woody-red);
+}
+.v2 .v2-ed__stat-label {
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  opacity: 0.7;
+  max-width: 12ch;
+}
+.v2 .v2-ed__closing {
+  margin: clamp(30px, 5vh, 54px) 0 0;
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.5rem, 3.1vw, 2.6rem);
+  line-height: 1;
+  text-transform: lowercase;
+  color: var(--woody-red);
+  max-width: 20ch;
+}
+.v2 .v2-ed__cta {
+  display: inline-block;
+  margin-top: clamp(22px, 4vh, 38px);
+  background: var(--woody-yellow);
+  color: var(--woody-red);
+  font-family: var(--font-woody-serif), serif;
+  font-size: clamp(15px, 1.3vw, 19px);
+  padding: 13px 30px;
+  border-radius: 999px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.v2 .v2-ed__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* right: a sticky, full-bleed photo stage that fills the right half and stays
+   put while the left text scrolls. Each page positions its tiles differently
+   (see below). overflow:hidden lets a "peek" tile bleed past and be clipped. */
+.v2 .v2-ed__photos {
+  align-self: start;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.v2 .v2-ed__photos .v2-ed__tile {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+}
+
+/* over — cover: one 30vw portrait (4/5) flush to the top & right edges */
+.v2 .v2-ed__photos--cover .v2-ed__tile:nth-child(1) {
+  top: 0;
+  right: 0;
+  width: 30vw;
+  aspect-ratio: 4 / 5;
+}
+.v2 .v2-ed__photos--cover .v2-ed__tile:nth-child(n + 2) {
+  display: none;
+}
+
+/* menu — peek-down: top photo flush full-width; 2nd narrower (60%), overlapping
+   up into the first and peeking cut at the bottom edge. Different widths make
+   the overlap read better. */
+.v2 .v2-ed__photos--peek-down .v2-ed__tile:nth-child(1) {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 58vh;
+}
+.v2 .v2-ed__photos--peek-down .v2-ed__tile:nth-child(2) {
+  top: 46vh; /* overlaps the top photo's last ~12vh */
+  right: 0;
+  width: 60%;
+  height: 88vh; /* extends past the bottom → clipped by overflow:hidden */
+}
+.v2 .v2-ed__photos--peek-down .v2-ed__tile:nth-child(n + 3) {
+  display: none;
+}
+
+/* groepen — peek-up: main photo flush full-width to bottom; 2nd narrower (60%),
+   overlapping down into the main and peeking cut at the top edge. */
+.v2 .v2-ed__photos--peek-up .v2-ed__tile:nth-child(1) {
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 58vh;
+}
+.v2 .v2-ed__photos--peek-up .v2-ed__tile:nth-child(2) {
+  bottom: 46vh; /* overlaps the main photo's top ~12vh */
+  right: 0;
+  width: 60%;
+  height: 88vh; /* extends past the top → clipped by overflow:hidden */
+}
+.v2 .v2-ed__photos--peek-up .v2-ed__tile:nth-child(n + 3) {
+  display: none;
+}
+
+/* werken — float-two: top photo flush to top+right; 2nd floating center-low */
+.v2 .v2-ed__photos--float-two .v2-ed__tile:nth-child(1) {
+  top: 0;
+  right: 0;
+  width: 62%;
+  aspect-ratio: 3 / 4;
+}
+.v2 .v2-ed__photos--float-two .v2-ed__tile:nth-child(2) {
+  top: 52%;
+  left: 8%;
+  width: 56%;
+  aspect-ratio: 4 / 3;
+  border-radius: 3px;
+  box-shadow: 0 14px 34px rgba(109, 21, 15, 0.2);
+}
+.v2 .v2-ed__photos--float-two .v2-ed__tile:nth-child(n + 3) {
+  display: none;
+}
+
+/* lokaal — float-one: a single block flush to the right, floating with air */
+.v2 .v2-ed__photos--float-one .v2-ed__tile:nth-child(1) {
+  top: 14%;
+  right: 0;
+  width: 64%;
+  aspect-ratio: 4 / 3;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 14px 34px rgba(109, 21, 15, 0.2);
+}
+.v2 .v2-ed__photos--float-one .v2-ed__tile:nth-child(n + 2) {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .v2 .v2-ed {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .v2 .v2-ed__text {
+    max-width: none;
+    padding: clamp(80px, 12vh, 120px) clamp(20px, 5vw, 32px) 8vh;
+  }
+  .v2 .v2-ed__photos {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: 0 clamp(20px, 5vw, 32px) 14vh;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    gap: 14px;
+  }
+  .v2 .v2-ed__photos::before {
+    display: none;
+  }
+  .v2 .v2-ed__photos .v2-ed__tile {
+    position: relative;
+    inset: auto;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    border-radius: 3px;
+    box-shadow: 0 14px 34px rgba(109, 21, 15, 0.2);
+    display: block;
   }
 }

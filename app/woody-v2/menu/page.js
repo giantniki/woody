@@ -1,0 +1,21 @@
+import Cursor from "@/components/Cursor";
+import V2Nav from "@/components/woodyv2/V2Nav";
+import V2BookButton from "@/components/woodyv2/V2BookButton";
+import EditorialPage from "@/components/woodyv2/EditorialPage";
+import { woodyV2Pages } from "@/lib/woody-v2-pages";
+
+export const metadata = {
+  title: "Menu — Woody",
+  description: "Woody is er de hele dag. Lunch, diner en borrel.",
+};
+
+export default function MenuPage() {
+  return (
+    <main>
+      <Cursor variant="woody" />
+      <V2Nav overlay />
+      <V2BookButton />
+      <EditorialPage data={woodyV2Pages.menu} />
+    </main>
+  );
+}

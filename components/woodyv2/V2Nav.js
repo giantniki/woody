@@ -12,7 +12,9 @@ const instagram = brand.socials[0];
 //
 // `solid` = pages without a dark hero (e.g. /woody-v2/info): the bar shows its
 // cream background from the start so the logo stays readable.
-export default function V2Nav({ solid = false }) {
+// `overlay` = pages whose hero is a full-bleed photo (e.g. /woody-v2/over): the
+// bar stays transparent with cream marks so the photo reads to the top edge.
+export default function V2Nav({ solid = false, overlay = false }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -38,7 +40,7 @@ export default function V2Nav({ solid = false }) {
 
   const barClass = [
     "v2-nav",
-    (scrolled || solid) && "v2-nav--solid",
+    overlay ? "v2-nav--overlay" : (scrolled || solid) && "v2-nav--solid",
     open && "v2-nav--open",
   ]
     .filter(Boolean)
@@ -85,18 +87,35 @@ export default function V2Nav({ solid = false }) {
         </nav>
 
         <div className="v2-overlay__foot">
-          <a className="v2-overlay__mail" href={`mailto:${brand.email}`}>
-            {brand.email}
-          </a>
-          <ul className="v2-overlay__locs">
-            {locations.map((l) => (
-              <li key={l.city}>
-                <strong>{l.city}</strong>
-                <span>{l.address}</span>
-                <span>{l.phone}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="v2-overlay__col">
+            <span className="v2-overlay__col-label">Contact</span>
+            <a className="v2-overlay__mail" href={`mailto:${brand.email}`}>
+              {brand.email}
+            </a>
+          </div>
+
+          <div className="v2-overlay__col">
+            <span className="v2-overlay__col-label">Volg</span>
+            <div className="v2-overlay__socials">
+              {brand.socials.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noreferrer">
+                  {s.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="v2-overlay__col">
+            <span className="v2-overlay__col-label">Locaties</span>
+            <ul className="v2-overlay__locs">
+              {locations.map((l) => (
+                <li key={l.city}>
+                  <strong>{l.city}</strong>
+                  <span>{l.address}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </>
