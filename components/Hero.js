@@ -9,7 +9,9 @@ import RotatingIcon from "@/components/RotatingIcon";
 // background: "photo" (landing 1) | "collage" (burgundy + scattered photos, landing 2/3)
 // collageVariant: "default" (8 scattered tiles) | "big" (fewer/larger tiles, one
 //                 bleeds down into the next section — see heroCollageBig).
-export default function Hero({ background = "photo", collageVariant = "default", logoVariant = "default", heroImage = null }) {
+// hideNav: skip the hero's internal nav (socials/logo/hamburger) — used when an
+//          external navbar (e.g. V2Nav) handles navigation instead.
+export default function Hero({ background = "photo", collageVariant = "default", logoVariant = "default", heroImage = null, hideNav = false }) {
   const isBig = background === "collage" && collageVariant === "big";
   const collage = isBig ? heroCollageBig : heroCollage;
   const [menuOpen, setMenuOpen] = useState(false);
@@ -46,7 +48,7 @@ export default function Hero({ background = "photo", collageVariant = "default",
         </>
       )}
 
-      <nav className="hero__nav">
+      <nav className="hero__nav" style={hideNav ? { display: "none" } : undefined}>
         <div className="hero__socials">
           {brand.socials.map((s, i) => (
             <span key={s.label}>
