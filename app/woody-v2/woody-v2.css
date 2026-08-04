@@ -681,3 +681,449 @@
     display: block;
   }
 }
+
+/* ==================================================================== agenda
+   Programma overview (013-style) — burgundy field, big Exposure titles, hover
+   reveals the event photo (follows cursor Y) while the other rows dim. */
+.v2 .agenda {
+  position: relative;
+  min-height: 100vh;
+  background: var(--woody-red);
+  color: var(--woody-cream);
+  padding: clamp(96px, 13vh, 150px) clamp(20px, 5vw, 80px) 14vh;
+}
+
+/* filters */
+.v2 .agenda__filters {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: clamp(20px, 5vw, 80px);
+  margin: 0 0 clamp(30px, 6vh, 66px);
+}
+.v2 .agenda__search input,
+.v2 .agenda__genre select {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid rgba(241, 240, 205, 0.5);
+  padding: 10px 0;
+  color: var(--woody-cream);
+  font-family: var(--font-woody-cond), sans-serif;
+  font-size: clamp(16px, 1.5vw, 20px);
+  letter-spacing: 0.02em;
+  outline: none;
+}
+.v2 .agenda__search input::placeholder {
+  color: rgba(241, 240, 205, 0.7);
+}
+.v2 .agenda__search input:focus,
+.v2 .agenda__genre select:focus {
+  border-bottom-color: var(--woody-yellow);
+}
+.v2 .agenda__genre {
+  position: relative;
+}
+.v2 .agenda__genre select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+.v2 .agenda__genre::after {
+  content: "⌄";
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  font-size: 20px;
+  color: var(--woody-cream);
+  pointer-events: none;
+}
+.v2 .agenda__genre option {
+  color: var(--woody-red);
+}
+
+/* list */
+.v2 .agenda__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.v2 .agenda__row {
+  border-top: 1px solid rgba(241, 240, 205, 0.18);
+  transition: opacity 0.3s ease;
+}
+.v2 .agenda__row:last-of-type {
+  border-bottom: 1px solid rgba(241, 240, 205, 0.18);
+}
+.v2 .agenda__list:hover .agenda__row,
+.v2 .agenda__list.is-hovering .agenda__row {
+  opacity: 0.32;
+}
+.v2 .agenda__list .agenda__row:hover,
+.v2 .agenda__list.is-hovering .agenda__row.is-active {
+  opacity: 1;
+}
+.v2 .agenda__link {
+  display: grid;
+  grid-template-columns: clamp(72px, 9vw, 130px) 1fr auto;
+  align-items: center;
+  gap: clamp(16px, 3vw, 44px);
+  padding: clamp(14px, 2.4vh, 30px) 0;
+  color: inherit;
+}
+.v2 .agenda__date {
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: clamp(12px, 1.1vw, 15px);
+  line-height: 1.2;
+}
+.v2 .agenda__main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.v2 .agenda__tag {
+  background: var(--woody-yellow);
+  color: var(--woody-red);
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+.v2 .agenda__title {
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.8rem, 4.4vw, 4rem);
+  line-height: 0.95;
+  text-transform: lowercase;
+  color: var(--woody-cream);
+}
+.v2 .agenda__genre-label {
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  opacity: 0.55;
+}
+.v2 .agenda__empty {
+  padding: 40px 0;
+  font-family: var(--font-woody-serif), Georgia, serif;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* cursor-following photo reveal (pinned right, follows the hovered row) */
+.v2 .agenda__preview {
+  position: fixed;
+  right: clamp(24px, 7vw, 110px);
+  width: clamp(260px, 34vw, 520px);
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translateY(-50%) scale(0.96);
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.v2 .agenda__preview.is-on {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+@media (max-width: 780px) {
+  .v2 .agenda__filters {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .v2 .agenda__link {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    align-items: start;
+  }
+  .v2 .agenda__genre-label {
+    display: none;
+  }
+  .v2 .agenda__preview {
+    display: none;
+  }
+  .v2 .agenda__list:hover .agenda__row {
+    opacity: 1;
+  }
+}
+
+/* ============================================================= event detail */
+/* photo hero */
+.v2 .ev-hero {
+  position: relative;
+  height: clamp(360px, 60vh, 620px);
+  overflow: hidden;
+}
+.v2 .ev-hero__img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.v2 .ev-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 4, 3, 0.5) 0%,
+    rgba(20, 4, 3, 0.05) 40%,
+    rgba(20, 4, 3, 0.78) 100%
+  );
+}
+.v2 .ev-hero__head {
+  position: absolute;
+  left: clamp(20px, 5vw, 84px);
+  right: clamp(20px, 5vw, 84px);
+  bottom: clamp(24px, 5vh, 60px);
+  color: var(--woody-cream);
+}
+.v2 .ev-hero__date {
+  display: inline-block;
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: clamp(13px, 1.3vw, 16px);
+  background: var(--woody-red);
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+.v2 .ev-hero__title {
+  margin: 0;
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  line-height: 0.9;
+  text-transform: lowercase;
+}
+
+/* two-column body */
+.v2 .ev-body {
+  display: grid;
+  grid-template-columns: 1fr clamp(280px, 30%, 400px);
+  gap: clamp(30px, 5vw, 80px);
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 84px);
+  align-items: start;
+}
+.v2 .ev-lead {
+  margin: 0 0 24px;
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  line-height: 1.1;
+  color: var(--woody-red);
+}
+.v2 .ev-desc p {
+  margin: 0 0 16px;
+  max-width: 60ch;
+  font-family: var(--font-woody-serif), Georgia, serif;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+}
+
+/* ticket / practical sidebar */
+.v2 .ev-aside {
+  position: sticky;
+  top: 96px;
+  border: 2px solid var(--woody-red);
+  border-radius: 6px;
+  padding: clamp(18px, 2vw, 26px);
+}
+.v2 .ev-cta {
+  display: block;
+  text-align: center;
+  background: var(--woody-yellow);
+  color: var(--woody-red);
+  font-family: var(--font-woody-serif), serif;
+  font-size: clamp(17px, 1.6vw, 21px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.v2 .ev-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 0 rgba(0, 0, 0, 0.12);
+}
+.v2 .ev-cta.is-sold {
+  background: transparent;
+  color: var(--woody-red);
+  border: 2px solid var(--woody-red);
+  box-shadow: none;
+  cursor: default;
+}
+.v2 .ev-cta.is-sold:hover {
+  transform: none;
+}
+.v2 .ev-info {
+  margin: 22px 0 0;
+}
+.v2 .ev-info > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(109, 21, 15, 0.16);
+}
+.v2 .ev-info dt {
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  opacity: 0.7;
+}
+.v2 .ev-info dd {
+  margin: 0;
+  text-align: right;
+  font-family: var(--font-woody-serif), serif;
+  font-size: 16px;
+}
+.v2 .ev-times {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(109, 21, 15, 0.16);
+}
+.v2 .ev-times__label {
+  display: inline-block;
+  background: var(--woody-red);
+  color: var(--woody-cream);
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  padding: 4px 10px;
+  margin-bottom: 12px;
+}
+.v2 .ev-times ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.v2 .ev-times li {
+  display: flex;
+  gap: 14px;
+  padding: 6px 0;
+  font-family: var(--font-woody-serif), serif;
+  font-size: 15px;
+}
+.v2 .ev-times__time {
+  min-width: 96px;
+}
+.v2 .ev-times__note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  opacity: 0.55;
+}
+
+/* meer voor jou (burgundy band) */
+.v2 .ev-more {
+  background: var(--woody-red);
+  color: var(--woody-cream);
+  padding: clamp(50px, 9vh, 100px) clamp(20px, 5vw, 84px);
+}
+.v2 .ev-more__title {
+  margin: 0 0 clamp(24px, 4vh, 44px);
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  text-transform: lowercase;
+  opacity: 0.55;
+}
+.v2 .ev-more__list {
+  list-style: none;
+  margin: 0 0 clamp(30px, 5vh, 54px);
+  padding: 0;
+}
+.v2 .ev-more__row {
+  border-top: 1px solid rgba(241, 240, 205, 0.18);
+  transition: opacity 0.3s ease;
+}
+.v2 .ev-more__row:last-of-type {
+  border-bottom: 1px solid rgba(241, 240, 205, 0.18);
+}
+.v2 .ev-more__list:hover .ev-more__row {
+  opacity: 0.4;
+}
+.v2 .ev-more__list .ev-more__row:hover {
+  opacity: 1;
+}
+.v2 .ev-more__row a {
+  display: grid;
+  grid-template-columns: clamp(72px, 8vw, 120px) 1fr;
+  gap: clamp(16px, 3vw, 40px);
+  align-items: baseline;
+  padding: clamp(14px, 2.4vh, 28px) 0;
+  color: inherit;
+}
+.v2 .ev-more__date {
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+}
+.v2 .ev-more__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.v2 .ev-more__tag {
+  align-self: start;
+  background: var(--woody-yellow);
+  color: var(--woody-red);
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.v2 .ev-more__name {
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.6rem, 3.6vw, 3rem);
+  line-height: 0.95;
+  text-transform: lowercase;
+}
+.v2 .ev-more__sub {
+  font-family: var(--font-woody-serif), Georgia, serif;
+  font-size: 15px;
+  opacity: 0.8;
+}
+.v2 .ev-more__cta {
+  display: inline-block;
+  border: 2px solid var(--woody-cream);
+  color: var(--woody-cream);
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 15px;
+  padding: 12px 28px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.v2 .ev-more__cta:hover {
+  background: var(--woody-cream);
+  color: var(--woody-red);
+}
+
+@media (max-width: 860px) {
+  .v2 .ev-body {
+    grid-template-columns: 1fr;
+  }
+  .v2 .ev-aside {
+    position: static;
+    order: -1;
+  }
+  .v2 .ev-more__row a {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
