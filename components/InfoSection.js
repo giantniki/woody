@@ -1,19 +1,29 @@
 "use client";
 
 import { intro, steps, visit, locations } from "@/lib/content";
-import DancingText from "@/components/DancingText";
+import Woord from "@/components/woodyv2/Woord";
 
-export default function InfoSection({ dancing = false }) {
-  const H = ({ text }) =>
-    dancing ? <DancingText text={text} intensity={1.4} /> : text;
+export default function InfoSection() {
   return (
     <section className="info" id="info">
-      <p className="info__intro">{intro.heading}</p>
+      <h2 className="info__intro">
+        <Woord
+          name="destadsherberg"
+          color="rood"
+          alt={intro.heading}
+          className="info__intro-img"
+        />
+      </h2>
       <p className="info__intro-sub">{intro.body}</p>
 
       <div className="steps">
         <h2 className="steps__title">
-          <H text={steps.title} />
+          <Woord
+            name="werkenbijwoody"
+            color="rood"
+            alt={steps.title}
+            className="steps__title-img"
+          />
         </h2>
         <p className="steps__body">{steps.body}</p>
         <a className="steps__cta" href="#solliciteer">{steps.cta}</a>
@@ -21,7 +31,12 @@ export default function InfoSection({ dancing = false }) {
 
       <div className="visit">
         <h2 className="visit__title">
-          <H text={visit.title} />
+          <Woord
+            name="hieriswoody"
+            color="rood"
+            alt={visit.title}
+            className="visit__title-img"
+          />
         </h2>
         <div className="visit__grid">
           <div className="visit__col">

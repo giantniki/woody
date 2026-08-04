@@ -1,0 +1,263 @@
+/* ==========================================================================
+   Woody theme layered over the FIRST landing page's markup.
+   We reuse the page-1 components/classes verbatim and only remap the design
+   tokens (colours + fonts) here, plus a few targeted fixes. Scoped under
+   .theme-woody so the original page (/) is untouched.
+   ========================================================================== */
+
+.theme-woody {
+  /* woody palette */
+  --woody-red: #6d150f;
+  --woody-cream: #f1f0cd;
+  --woody-yellow: #f2c00d;
+
+  /* remap the page-1 tokens → woody */
+  --cream: #f1f0cd;
+  --ink: #6d150f;
+  --red: #f2c00d; /* accent */
+  --orange: #6d150f;
+  --font-display: var(--font-woody-display), cursive;
+  --font-serif: var(--font-woody-serif), Georgia, serif;
+  --font-cond: var(--font-woody-cond), "Barlow Condensed", system-ui, sans-serif;
+
+  min-height: 100vh;
+  background: var(--woody-cream);
+  color: var(--woody-red);
+}
+
+/* Exposure achieves hierarchy through WIDTH (-10/-40/-90), not weight.
+   Neutralize fake browser-bold so nothing looks synthetically thickened. */
+.theme-woody * {
+  font-weight: 400 !important;
+}
+
+/* --------------------------------------------------------------- cursor */
+/* graphic cursor (woo / beeldmerk / klaveren) — a soft shadow keeps the beige
+   marks legible over cream backgrounds. */
+.theme-woody .woo-cursor--woody .woo-cursor__ic {
+  filter: drop-shadow(0 2px 5px rgba(20, 4, 3, 0.4));
+}
+
+/* ---------------------------------------------------------------- hero */
+/* Combined hero: landing-1 title (changing icon lockup) over landing-2's
+   burgundy background + scattered photo collage. */
+.theme-woody .hero--collage {
+  background: var(--woody-red);
+}
+.theme-woody .hero__collage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.theme-woody .hero__tile {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+}
+/* lockup + nav + button sit above the collage */
+.theme-woody .hero--collage .hero__lockup,
+.theme-woody .hero--collage .hero__nav {
+  z-index: 3;
+}
+
+/* ---- full-bleed single hero image (replaces collage) */
+.theme-woody .hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.theme-woody .hero--collage .hero__image + .hero__nav,
+.theme-woody .hero--collage .hero__image + .hero__lockup,
+.theme-woody .hero--collage .hero__image ~ .hero__lockup,
+.theme-woody .hero--collage .hero__image ~ .hero__nav,
+.theme-woody .hero--collage .hero__image ~ .hero__reserve,
+.theme-woody .hero--collage .hero__image ~ .hero__email {
+  z-index: 3;
+}
+
+/* ---- "bar woody" stacked logo (replaces the Smiley/VAN/RotatingIcon lockup) */
+.theme-woody .hero__wd-logo {
+  margin: 0;
+  color: var(--woody-cream);
+  text-align: center;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+}
+.theme-woody .hero__wd-logo__top,
+.theme-woody .hero__wd-logo__main {
+  display: block;
+  font-family: var(--font-woody-display), cursive;
+  text-transform: lowercase;
+  font-weight: 400;
+}
+.theme-woody .hero__wd-logo__top {
+  font-size: clamp(1.3rem, 2.8vw, 2.6rem);
+  transform: translateX(-1.15em);
+  margin-bottom: -0.14em;
+}
+.theme-woody .hero__wd-logo__main {
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: 0.78;
+}
+
+/* ---- "big" collage variant: fewer/larger photos, one bleeds into next section.
+   We let the hero overflow (so the crossing tile can extend past the bottom),
+   and lift the whole hero above the following .showcase so the bleed paints
+   on top of it. */
+.theme-woody .hero--collage-big {
+  overflow: visible;
+  z-index: 5;
+}
+.theme-woody .hero--collage-big .hero__tile--cross {
+  z-index: 2;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* reserve button → yellow pill with burgundy text */
+.theme-woody .hero__reserve {
+  background: var(--woody-yellow);
+  color: var(--woody-red);
+  border-radius: 999px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
+}
+.theme-woody .hero__reserve:hover {
+  background: #d9ad0a;
+}
+
+.theme-woody .showcase {
+  background: var(--woody-red);
+}
+/* Cream lockup words, burgundy caption background — swapped from default. */
+.theme-woody .lockup-text,
+.theme-woody .triplet--left .lockup-text {
+  color: var(--woody-cream);
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+  font-size: clamp(2.6rem, 9.2vw, 8.4rem);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+/* Caption sits directly below the back photo; JS sets top dynamically */
+.theme-woody .triplet__caption {
+  background: var(--woody-red);
+  color: var(--woody-cream);
+  text-align: left;
+  font-size: 22px;
+  max-width: 420px;
+  z-index: 0;
+  bottom: auto;
+  transform: none;
+}
+/* Right-side caption: right edge 4% beyond back photo's right edge */
+.theme-woody .triplet--right .triplet__caption {
+  right: 14.5%;
+  left: auto;
+}
+/* Left-side caption: left edge 4% beyond back photo's left edge */
+.theme-woody .triplet--left .triplet__caption {
+  left: 14.5%;
+  right: auto;
+}
+
+/* ------------------------------------------------------------ info block */
+.theme-woody .step__n {
+  color: var(--woody-red);
+}
+/* Steps body text */
+.theme-woody .steps__body {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  max-width: 620px;
+  margin: 0 auto 28px;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.theme-woody .steps__cta {
+  display: inline-block;
+  background: var(--woody-yellow);
+  color: var(--woody-red);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 14px 36px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  transition: background 0.15s ease;
+}
+.theme-woody .steps__cta:hover {
+  background: #d9ad0a;
+}
+/* More space between Solliciteer nu and HIER IS WOODY */
+.theme-woody .steps {
+  margin-bottom: 10vh;
+}
+.theme-woody .visit__links a:hover {
+  color: var(--woody-yellow);
+}
+
+/* --------------------------------------------------------------- closing */
+/* Closing section: cream background with photo */
+.theme-woody .closing {
+  background: var(--woody-cream);
+}
+.theme-woody .closing__image::after {
+  background: rgba(0, 0, 0, 0.25);
+}
+/* "Er is hier altijd plek. Schuif aan." text in closing photo section */
+.theme-woody .closing .closing__pre-label {
+  position: relative;
+  z-index: 2;
+  color: var(--woody-cream);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.4vw, 3rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.theme-woody .closing .closing__pre-label span {
+  display: block;
+}
+/* Closing bar: cream background */
+.theme-woody .closing__bar {
+  background: var(--woody-cream) !important;
+}
+/* "Er is hier altijd plek. Schuif aan." above RESERVEREN button */
+.theme-woody .closing__bar .closing__pre-label {
+  color: var(--woody-red);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.4vw, 3rem);
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.theme-woody .closing__bar .closing__pre-label span {
+  display: block;
+}
+/* banner is puffy + dancing; colour cycles through red, black, burgundy */
+.theme-woody .closing__banner {
+  border-width: 7px;
+  font-size: clamp(2.13rem, 8.5vw, 9.35rem);
+}
+
+/* "Reserveren" closing banner: boldest width ([-10] via --font-display)
+   + always one line */
+.theme-woody .closing__banner {
+  white-space: nowrap;
+}
+
+/* dancing letters keep the block line layout inside these headings */
+.theme-woody .lockup-text .dt,
+.theme-woody .visit__title .dt,
+.theme-woody .steps__title .dt,
+.theme-woody .closing__banner .dt {
+  display: inline-block;
+}

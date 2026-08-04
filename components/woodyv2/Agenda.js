@@ -1,21 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { agendaEvents, agendaGenres } from "@/lib/woody-agenda";
+import { agendaEvents, agendaGenres, agendaCities } from "@/lib/woody-agenda";
 
 // Agenda / programma overview (013-style): a list of events over a burgundy
 // field. Hovering a row reveals the event's photo (following the cursor) while
-// the other rows dim. Search + genre filter the list. Woody huisstijl.
+// the other rows dim. Filter by stad + genre. Woody huisstijl.
 export default function Agenda() {
-  const [query, setQuery] = useState("");
+  const [city, setCity] = useState("");
   const [genre, setGenre] = useState("");
   const [active, setActive] = useState(null); // hovered event
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
   const shown = agendaEvents.filter(
-    (e) =>
-      (!query || e.title.toLowerCase().includes(query.toLowerCase())) &&
-      (!genre || e.genre === genre)
+    (e) => (!city || e.city === city) && (!genre || e.genre === genre)
   );
 
   return (
@@ -24,17 +22,24 @@ export default function Agenda() {
       onMouseMove={(e) => setPos({ x: e.clientX, y: e.clientY })}
       onMouseLeave={() => setActive(null)}
     >
+      <h1 className="agenda__h1">altijd wat te doen</h1>
+
       <div className="agenda__filters">
-        <div className="agenda__search">
-          <input
-            type="search"
-            placeholder="Zoek artiest of evenement"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            aria-label="Zoek artiest of evenement"
-          />
+        <div className="agenda__select">
+          <select
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            aria-label="Selecteer stad"
+          >
+            <option value="">Selecteer stad</option>
+            {agendaCities.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
         </div>
-        <div className="agenda__genre">
+        <div className="agenda__select">
           <select
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
@@ -59,19 +64,21 @@ export default function Agenda() {
             }`}
             onMouseEnter={() => setActive(ev)}
           >
-            <a className="agenda__link" href={`/woody-v2/agenda/${ev.slug}`}>
+            <a className="agenda__link" href={`/agenda/${ev.slug}`}>
               <span className="agenda__date">{ev.date}</span>
               <span className="agenda__main">
                 {ev.tag && <span className="agenda__tag">{ev.tag}</span>}
                 <span className="agenda__title">{ev.title}</span>
               </span>
-              <span className="agenda__genre-label">{ev.genre}</span>
+              <span className="agenda__genre-label">{ev.city}</span>
             </a>
           </li>
         ))}
 
         {shown.length === 0 && (
-          <li className="agenda__empty">Niks gevonden. Probeer iets anders.</li>
+          <li className="agenda__empty">
+            Niks gevonden. Probeer een andere stad of genre.
+          </li>
         )}
       </ul>
 

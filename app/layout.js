@@ -1,34 +1,48 @@
-import { Anton, Barlow_Condensed, Bitter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import "./theme-woody.css";
+import "./woody-v2.css";
 
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-display",
+// 205TF Exposure — licensed brand font for Woody. Hierarchy by WIDTH, not weight.
+const exposureDisplay = localFont({
+  src: [
+    { path: "./fonts/Exposure-90.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Exposure-90Italic.woff2", weight: "400", style: "italic" },
+  ],
+  variable: "--font-woody-display",
+  display: "swap",
 });
-
-const barlow = Barlow_Condensed({
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-cond",
+const exposureBody = localFont({
+  src: [
+    { path: "./fonts/Exposure-40.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Exposure-40Italic.woff2", weight: "400", style: "italic" },
+  ],
+  variable: "--font-woody-serif",
+  display: "swap",
 });
-
-const bitter = Bitter({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  variable: "--font-serif",
+const exposureCond = localFont({
+  src: [
+    { path: "./fonts/Exposure-10.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Exposure-10Italic.woff2", weight: "400", style: "italic" },
+  ],
+  variable: "--font-woody-cond",
+  display: "swap",
 });
 
 export const metadata = {
-  title: "Bar Woody — Arnhem",
+  title: "Bar Woody — de stadsherberg van nu",
   description:
-    "Zelf bier en wijn tappen aan de tapwand. 100 bieren en 80 wijnen, lunch, borrel en diner bij Bar Woody Arnhem.",
+    "Woody is geen bar. Woody is een vriend die bier tapt. Zelf tappen, samen ontdekken, blijven hangen.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="nl" className={`${anton.variable} ${barlow.variable} ${bitter.variable}`}>
-      <body>{children}</body>
+    <html lang="nl">
+      <body
+        className={`theme-woody v2 ${exposureDisplay.variable} ${exposureBody.variable} ${exposureCond.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

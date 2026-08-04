@@ -45,7 +45,7 @@ export default function InfoTwoCol() {
             >
               Route
             </a>
-            <a className="v2-info__cta" href="/woody-v2#reserveren">
+            <a className="v2-info__cta" href="/reserveren">
               Reserveren
             </a>
           </p>

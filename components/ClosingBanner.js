@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { closing, brand } from "@/lib/content";
-import DancingText from "@/components/DancingText";
+import Woord from "@/components/woodyv2/Woord";
 
 // Colours the banner border + text cycle through, every 300ms.
 const DEFAULT_COLORS = [
@@ -35,16 +35,21 @@ export default function ClosingBanner({ dancing = false, colors = DEFAULT_COLORS
       </section>
       <section className="closing__bar" ref={bannerRef}>
         <div className="closing__pre-label">
-          {closing.preLabel.split("\n").map((line, i) => (
-            <span key={i}>{line}</span>
-          ))}
+          <span>Er is hier altijd plek.</span>
+          <Woord
+            name="schuifaan"
+            color="rood"
+            alt="Schuif aan"
+            className="closing__pre-img"
+          />
         </div>
         <a className="closing__banner" href={`mailto:${brand.email}`}>
-          {dancing ? (
-            <DancingText text={closing.bannerLabel} intensity={1.5} />
-          ) : (
-            closing.bannerLabel
-          )}
+          <Woord
+            name="reserveren"
+            color="rood"
+            alt={closing.bannerLabel}
+            className="closing__banner-img"
+          />
         </a>
       </section>
       <footer className="closing__footer">

@@ -10,6 +10,7 @@ function Paras({ text }) {
 // (description | ticket & practical sidebar) + a "meer voor jou" block.
 export default function EventDetail({ event }) {
   const sold = event.tag === "uitverkocht";
+  const free = /gratis/i.test(event.price || "");
   const related = moreEvents(event.slug, 3);
 
   return (
@@ -38,9 +39,9 @@ export default function EventDetail({ event }) {
         <aside className="ev-aside">
           <a
             className={`ev-cta${sold ? " is-sold" : ""}`}
-            href={sold ? "#" : "/woody-v2#reserveren"}
+            href={sold ? "#" : "/reserveren"}
           >
-            {sold ? "Uitverkocht" : "Tickets"}
+            {sold ? "Uitverkocht" : free ? "Gratis" : "Tickets"}
           </a>
 
           <dl className="ev-info">
@@ -53,8 +54,8 @@ export default function EventDetail({ event }) {
               <dd>{dateLong(event.date)}</dd>
             </div>
             <div>
-              <dt>Zaal</dt>
-              <dd>{event.zaal}</dd>
+              <dt>Locatie</dt>
+              <dd>Woody {event.city}</dd>
             </div>
           </dl>
 
@@ -80,7 +81,7 @@ export default function EventDetail({ event }) {
         <ul className="ev-more__list">
           {related.map((ev) => (
             <li key={ev.slug} className="ev-more__row">
-              <a href={`/woody-v2/agenda/${ev.slug}`}>
+              <a href={`/agenda/${ev.slug}`}>
                 <span className="ev-more__date">{ev.date}</span>
                 <span className="ev-more__body">
                   {ev.tag && <span className="ev-more__tag">{ev.tag}</span>}
@@ -93,7 +94,7 @@ export default function EventDetail({ event }) {
             </li>
           ))}
         </ul>
-        <a className="ev-more__cta" href="/woody-v2/agenda">
+        <a className="ev-more__cta" href="/agenda">
           Bekijk programma
         </a>
       </section>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import { showcase } from "@/lib/content";
 import DancingText from "@/components/DancingText";
+import Woord from "@/components/woodyv2/Woord";
 
 export default function ParallaxShowcase({ dancing = false }) {
   const rootRef = useRef(null);
@@ -94,15 +95,24 @@ export default function ParallaxShowcase({ dancing = false }) {
 
           {/* foreground lockup — transparent, pops the most */}
           <div className="layer layer--lockup" data-speed="0.26">
-            <h2 className="lockup-text">
-              {dancing ? (
-                <DancingText text={item.lockup} intensity={1.7} />
-              ) : (
-                item.lockup
-                  .split("\n")
-                  .map((line, li) => <span key={li}>{line}</span>)
-              )}
-            </h2>
+            {item.lockupImg ? (
+              <Woord
+                name={item.lockupImg}
+                color="beige"
+                alt={item.lockup.replace(/\n/g, " ")}
+                className="lockup-img"
+              />
+            ) : (
+              <h2 className="lockup-text">
+                {dancing ? (
+                  <DancingText text={item.lockup} intensity={1.7} />
+                ) : (
+                  item.lockup
+                    .split("\n")
+                    .map((line, li) => <span key={li}>{line}</span>)
+                )}
+              </h2>
+            )}
           </div>
 
           <div className="triplet__caption" data-speed="0.06">

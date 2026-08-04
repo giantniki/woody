@@ -78,6 +78,16 @@ export default function Hero({ background = "photo", collageVariant = "default",
         </div>
       )}
 
+      {isWoodyLogo && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          className="hero__spin"
+          src="/gfx/beeldmerk2-beige.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      )}
+
       <div className="hero__lockup">
         {isWoodyLogo ? (
           <h1 className="hero__wd-logo">
