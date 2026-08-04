@@ -1,7 +1,8 @@
 "use client";
 
-// Reusable editorial page for /woody-v2 (Over · Menu · Team · Lokaal ·
-// Groepen · Reserveren): Driven by lib/woody-v2-pages.js data.
+// Reusable editorial page for /woody-v2 (Over · Menu · Werken · Lokaal ·
+// Groepen): a text column on the left (title + intro + sections + CTA) and a
+// cluster of scattered photos on the right. Driven by lib/woody-v2-pages.js.
 
 function Paras({ text }) {
   return String(text)
@@ -9,36 +10,31 @@ function Paras({ text }) {
     .map((p, i) => <p key={i}>{p}</p>);
 }
 
+// One distinct photo composition per page (right half). Driven by slug so the
+// Dutch copy in lib/woody-v2-pages.js stays untouched.
+//   cover      → over    · 1 foto flush full-bleed
+//   peek-down  → menu    · 2 flush, la 2ª asoma cortada por abajo
+//   float-two  → werken  · 2 flotando con aire cream
+//   float-one  → lokaal  · 1 flotando con aire cream
+//   peek-up    → groepen · 2 flush, la 2ª asoma cortada por arriba
 const LAYOUT_BY_SLUG = {
-  over: "ketelhuis-info",
-  menu: "ketelhuis-vacatures",
+  over: "cover",
+  menu: "peek-down",
   werken: "float-two",
-  lokaal: "ketelhuis-niksnieuws",
-  groepen: "ketelhuis-info",
-  reserveren: "ketelhuis-vacatures",
+  lokaal: "float-one",
+  groepen: "peek-up",
 };
 
 export default function EditorialPage({ data }) {
-  const layout = LAYOUT_BY_SLUG[data.slug] || data.layout || "ketelhuis-info";
-  const isMenu = data.slug === "menu";
-
+  const layout = LAYOUT_BY_SLUG[data.slug] || data.layout || "cover";
   return (
     <section className="v2-ed">
       <div className="v2-ed__text">
         <h1 className="v2-ed__title">{data.title}</h1>
-        {data.subtitle && <p className="v2-ed__subtitle">{data.subtitle}</p>}
 
         {data.intro && (
           <div className="v2-ed__intro">
             <Paras text={data.intro} />
-          </div>
-        )}
-
-        {isMenu && data.cta && (
-          <div className="v2-ed__top-cta">
-            <a className="v2-ed__cta" href={data.cta.href}>
-              {data.cta.label}
-            </a>
           </div>
         )}
 
@@ -68,18 +64,12 @@ export default function EditorialPage({ data }) {
                 <Paras text={s.body} />
               </div>
             )}
-
-            {s.cta && (
-              <a className="v2-ed__section-cta" href={s.cta.href}>
-                {s.cta.label} →
-              </a>
-            )}
           </div>
         ))}
 
         {data.closing && <p className="v2-ed__closing">{data.closing}</p>}
 
-        {!isMenu && data.cta && (
+        {data.cta && (
           <a className="v2-ed__cta" href={data.cta.href}>
             {data.cta.label}
           </a>
@@ -94,10 +84,7 @@ export default function EditorialPage({ data }) {
           <div
             key={i}
             className="v2-ed__tile"
-            style={{
-              backgroundImage: `url(${p.src})`,
-              ...(p.ar ? { aspectRatio: p.ar } : {}),
-            }}
+            style={{ backgroundImage: `url(${p.src})` }}
           />
         ))}
       </div>
