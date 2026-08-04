@@ -1,24 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { brand, locations } from "@/lib/content";
 import { v2NavLinks, v2Brand } from "@/lib/woody-v2-content";
+import V2Footer from "@/components/woodyv2/V2Footer";
 
-const instagram = brand.socials[0];
-
-// Sticky nav-menu (the "menu" Niki means): fixed logo + hamburger that condenses
-// on scroll, opening a full-screen burgundy overlay with big Exposure links —
-// The Jane / aiyanna direction, in Woody's huisstijl.
-//
-// `solid` = pages without a dark hero (e.g. /woody-v2/info): the bar shows its
-// cream background from the start so the logo stays readable.
-// `overlay` = pages whose hero is a full-bleed photo (e.g. /woody-v2/over): the
-// bar stays transparent with cream marks so the photo reads to the top edge.
+// Sticky nav-menu: fixed logo + hamburger that condenses on scroll,
+// opening a full-screen burgundy overlay with big Exposure links.
 export default function V2Nav({ solid = false, overlay = false }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // condense on scroll (cheap: only flips a boolean past a threshold)
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -26,7 +17,6 @@ export default function V2Nav({ solid = false, overlay = false }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // lock body scroll + close on Esc while the overlay is open
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && setOpen(false);
@@ -49,27 +39,25 @@ export default function V2Nav({ solid = false, overlay = false }) {
   return (
     <>
       <header className={barClass}>
-        <a
-          className="v2-nav__ig"
-          href={instagram.href}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {instagram.label}
-        </a>
         <a className="v2-nav__logo" href="/woody-v2" onClick={() => setOpen(false)}>
           {v2Brand}
         </a>
-        <button
-          className={`v2-nav__burger${open ? " is-open" : ""}`}
-          aria-label={open ? "Sluit menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+
+        <div className="v2-nav__right">
+          <a className="v2-nav__reserveren-btn" href="/woody-v2/reserveren">
+            Reserveren
+          </a>
+          <button
+            className={`v2-nav__burger${open ? " is-open" : ""}`}
+            aria-label={open ? "Sluit menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
 
       <div className={`v2-overlay${open ? " is-open" : ""}`} aria-hidden={!open}>
@@ -86,37 +74,7 @@ export default function V2Nav({ solid = false, overlay = false }) {
           ))}
         </nav>
 
-        <div className="v2-overlay__foot">
-          <div className="v2-overlay__col">
-            <span className="v2-overlay__col-label">Contact</span>
-            <a className="v2-overlay__mail" href={`mailto:${brand.email}`}>
-              {brand.email}
-            </a>
-          </div>
-
-          <div className="v2-overlay__col">
-            <span className="v2-overlay__col-label">Volg</span>
-            <div className="v2-overlay__socials">
-              {brand.socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer">
-                  {s.label}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="v2-overlay__col">
-            <span className="v2-overlay__col-label">Locaties</span>
-            <ul className="v2-overlay__locs">
-              {locations.map((l) => (
-                <li key={l.city}>
-                  <strong>{l.city}</strong>
-                  <span>{l.address}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <V2Footer />
       </div>
     </>
   );
