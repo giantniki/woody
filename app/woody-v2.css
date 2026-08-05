@@ -42,8 +42,9 @@
   box-shadow: 0 6px 24px rgba(109, 21, 15, 0.14);
 }
 
-/* logo — designed wordmark, pinned top-middle; the src swaps beige↔burgundy in
-   V2Nav so it stays legible over the hero photo and the cream bar alike. */
+/* logo — designed wordmark, pinned top-middle. Two colourways are stacked: the
+   context (hero/overlay = beige, cream bar = burgundy) picks the base, and
+   hovering flips to the other colour. */
 .v2 .v2-nav__logo {
   position: absolute;
   left: 50%;
@@ -51,15 +52,42 @@
   transform: translate(-50%, -50%);
   display: block;
   line-height: 0;
+  height: clamp(32px, 3.6vw, 50px);
 }
-.v2 .v2-nav__logo img {
+.v2 .v2-nav--solid .v2-nav__logo {
+  height: clamp(27px, 3vw, 40px);
+}
+.v2 .v2-nav__logo-img {
   display: block;
-  height: clamp(26px, 3vw, 40px);
+  height: 100%;
   width: auto;
-  transition: height 0.3s ease;
+  transition: opacity 0.25s ease, height 0.3s ease;
 }
-.v2 .v2-nav--solid .v2-nav__logo img {
-  height: clamp(22px, 2.5vw, 33px);
+.v2 .v2-nav__logo-img.is-rood {
+  position: absolute;
+  inset: 0;
+}
+/* base colour by context: beige over hero/overlay/open, burgundy on cream bar */
+.v2 .v2-nav__logo .is-rood {
+  opacity: 0;
+}
+.v2 .v2-nav__logo .is-beige {
+  opacity: 1;
+}
+.v2 .v2-nav--solid .v2-nav__logo .is-rood {
+  opacity: 1;
+}
+.v2 .v2-nav--solid .v2-nav__logo .is-beige {
+  opacity: 0;
+}
+/* hover flips to the other colourway */
+.v2 .v2-nav:not(.v2-nav--solid) .v2-nav__logo:hover .is-beige,
+.v2 .v2-nav--solid .v2-nav__logo:hover .is-rood {
+  opacity: 0;
+}
+.v2 .v2-nav:not(.v2-nav--solid) .v2-nav__logo:hover .is-rood,
+.v2 .v2-nav--solid .v2-nav__logo:hover .is-beige {
+  opacity: 1;
 }
 
 /* hamburger (also the close X — bigger + fatter) */
@@ -71,6 +99,7 @@
   width: 56px;
   height: 48px;
   padding: 8px;
+  margin-left: auto; /* logo is absolute-centred, so pin the burger/X right */
   background: none;
   border: 0;
   cursor: pointer;
@@ -122,20 +151,8 @@
 .v2 .v2-nav--overlay .v2-nav__burger span {
   background: var(--woody-cream);
 }
-/* full-width legibility scrim behind the transparent nav — keeps the cream
-   marks readable whether they sit over a photo or the cream page. Travels with
-   the fixed nav, so it works on every editorial page. */
-.v2 .v2-nav--overlay::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 160px;
-  background: linear-gradient(to bottom, rgba(20, 4, 3, 0.5), rgba(20, 4, 3, 0));
-  z-index: -1;
-  pointer-events: none;
-}
+/* (removed) the legibility scrim behind the transparent nav — Niki read it as a
+   drop shadow behind the logo/menu, so the bar is now fully clean. */
 
 /* ------------------------------------------------ hero: single photo bg */
 .v2 .v2-hero__bg {
@@ -179,7 +196,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 15vh clamp(20px, 5vw, 80px) 6vh;
+  padding: 17vh clamp(30px, 9vw, 150px) 7vh;
   overflow-y: auto;
   opacity: 0;
   visibility: hidden;
@@ -195,7 +212,8 @@
 .v2 .v2-overlay__links {
   display: flex;
   flex-direction: column;
-  gap: clamp(2px, 1vh, 12px);
+  gap: clamp(8px, 1.8vh, 22px);
+  margin: clamp(16px, 4vh, 48px) 0;
 }
 .v2 .v2-overlay__links a {
   width: fit-content;
@@ -204,6 +222,7 @@
   line-height: 1.18; /* room for the puffy descenders/ascenders */
   padding: 0.04em 0;
   text-transform: lowercase;
+  text-decoration: none; /* kill the stray underline on hover */
   color: var(--woody-cream);
   opacity: 0;
   transform: translateY(18px);
@@ -328,17 +347,28 @@
   }
 }
 
-/* -------------------------------------- spinning beeldmerk badge in the hero */
+/* ---------------------------- spinning Bar Woody emblem — hero centrepiece */
 .v2 .hero__spin {
   position: absolute;
   z-index: 3;
-  left: clamp(18px, 5vw, 78px);
-  bottom: clamp(20px, 6vh, 74px);
-  width: clamp(78px, 10vw, 148px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  width: clamp(220px, 34vw, 480px);
   height: auto;
-  opacity: 0.92;
+  opacity: 1;
   pointer-events: none;
-  animation: v2spin 22s linear infinite;
+  animation: heroSpin 26s linear infinite;
+}
+/* keeps the centring translate while it rotates (plain rotate would fight it) */
+@keyframes heroSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .v2 .hero__spin {
@@ -677,11 +707,11 @@
   display: none;
 }
 
-/* lokaal — float-one: a single big block flush to the right */
+/* lokaal / groepen — float-one: a single big block flush to the right */
 .v2 .v2-ed__photos--float-one .v2-ed__tile:nth-child(1) {
-  top: 8%;
+  top: 6%;
   right: 0;
-  width: 82%;
+  width: 94%;
   aspect-ratio: 4 / 3;
   border-radius: 3px 0 0 3px;
   box-shadow: 0 14px 34px rgba(109, 21, 15, 0.2);
@@ -1182,6 +1212,10 @@
   color: var(--woody-cream);
   padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 84px) clamp(30px, 5vh, 56px);
 }
+/* keep the bottom-right corner clear for the floating BOEK TAFEL button */
+.v2 .v2-footer:not(.v2-footer--overlay) {
+  padding-right: clamp(24px, 4vw, 200px);
+}
 /* inside the menu overlay: no own background, pinned to the bottom */
 .v2 .v2-footer--overlay {
   background: transparent;
@@ -1201,9 +1235,10 @@
   padding: 0;
   cursor: pointer;
   color: var(--woody-cream);
+  font-family: var(--font-woody-display), cursive;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 14px;
+  letter-spacing: 0.06em;
+  font-size: 22px;
   opacity: 0.55;
 }
 .v2 .v2-footer__lang button.is-on {
@@ -1215,8 +1250,8 @@
 }
 .v2 .v2-footer__cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr) auto;
-  gap: clamp(24px, 4vw, 60px);
+  grid-template-columns: repeat(3, auto) 1fr;
+  gap: clamp(16px, 2.4vw, 34px);
   align-items: start;
 }
 .v2 .v2-footer__col {
@@ -1234,16 +1269,17 @@
 }
 .v2 .v2-footer__label {
   font-family: var(--font-woody-cond), sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 12px;
-  opacity: 0.6;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 15px;
+  opacity: 0.7;
   margin-bottom: 8px;
 }
 .v2 .v2-footer__socials {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   align-items: center;
+  justify-self: end;
 }
 .v2 .v2-footer__socials a {
   color: var(--woody-cream);
@@ -1307,18 +1343,85 @@
   width: min(88%, 560px);
   margin: 0 auto;
 }
+/* Werken bij Woody? + Hier is Woody — same size as De stadsherberg van nu */
 .v2 .steps__title-img,
 .v2 .visit__title-img {
-  width: auto;
-  height: clamp(2.1rem, 4.6vw, 3.7rem);
+  width: min(88%, 560px);
+  height: auto;
   margin: 0 auto;
+}
+
+/* three Woody locations as three columns + a centred opening line */
+.v2 .visit__cities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 4vw, 60px);
+  max-width: 900px;
+  margin: clamp(28px, 5vh, 56px) auto 0;
+}
+.v2 .visit__city {
+  text-align: center;
+}
+.v2 .visit__city .visit__place {
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  color: var(--woody-red);
+  margin: 0 0 10px;
+}
+.v2 .visit__city .visit__line {
+  font-family: var(--font-woody-serif), serif;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.4;
+  margin: 0;
+}
+.v2 .visit__route {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--font-woody-cond), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  color: var(--woody-red);
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 2px;
+}
+.v2 .visit__route:hover {
+  color: var(--woody-yellow);
+}
+.v2 .visit__open {
+  text-align: center;
+  margin-top: clamp(30px, 5vh, 58px);
+}
+.v2 .visit__open-label {
+  font-family: var(--font-woody-display), cursive;
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  color: var(--woody-red);
+  margin: 0 0 4px;
+}
+.v2 .visit__open-line {
+  font-family: var(--font-woody-serif), serif;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .v2 .visit__cities {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 .v2 .closing__pre-label .closing__pre-img {
   width: min(66%, 300px);
   margin: 10px auto 0;
 }
-.v2 .closing__banner-img {
+/* RESERVEREN — big, centred, filled with the cycling banner colour so it
+   changes colour together with the box border. */
+.v2 .closing__banner-word {
   display: block;
-  height: clamp(2.4rem, 9vw, 8.4rem);
-  width: auto;
+  margin: 0 auto;
+  height: clamp(3rem, 11vw, 9rem);
+  aspect-ratio: 1484 / 287;
+  background: var(--banner-color, var(--woody-red));
+  -webkit-mask: url(/gfx/word-reserveren-rood.png) center / contain no-repeat;
+  mask: url(/gfx/word-reserveren-rood.png) center / contain no-repeat;
+  transition: background 0.2s ease;
 }

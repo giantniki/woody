@@ -38,11 +38,6 @@ export default function V2Nav({ solid = false, overlay = false }) {
     .filter(Boolean)
     .join(" ");
 
-  // Logo color switches with context: beige over the dark hero / open overlay,
-  // burgundy once a cream bar is showing.
-  const onCream = !open && (solid || scrolled);
-  const logoSrc = onCream ? "/gfx/logo-rood.svg" : "/gfx/logo-beige.svg";
-
   return (
     <>
       <header className={barClass}>
@@ -52,8 +47,11 @@ export default function V2Nav({ solid = false, overlay = false }) {
           aria-label={v2Brand}
           onClick={() => setOpen(false)}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoSrc} alt="Woody" />
+          {/* both colourways stacked; CSS shows one by context and flips on hover */}
+          {/* eslint-disable @next/next/no-img-element */}
+          <img className="v2-nav__logo-img is-beige" src="/gfx/logo-beige.svg" alt="Woody" />
+          <img className="v2-nav__logo-img is-rood" src="/gfx/logo-rood.svg" alt="" />
+          {/* eslint-enable @next/next/no-img-element */}
         </a>
         <button
           className={`v2-nav__burger${open ? " is-open" : ""}`}

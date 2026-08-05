@@ -19,12 +19,15 @@ function Paras({ text }) {
 //   float-two  → werken  · 2 flotando con aire cream
 //   float-one  → lokaal  · 1 flotando con aire cream
 //   peek-up    → groepen · 2 flush, la 2ª asoma cortada por arriba
+// Niki disliked the busy 2-photo peek setups on menu/groepen/reserveren → they
+// now use a single clean image: portrait pages use "cover" (like /over),
+// landscape pages use "float-one" (like /lokaal).
 const LAYOUT_BY_SLUG = {
   over: "cover",
-  menu: "peek-down",
+  menu: "cover", // portrait photo
   werken: "float-two",
   lokaal: "float-one",
-  groepen: "peek-up",
+  groepen: "float-one", // landscape photo
 };
 
 export default function EditorialPage({ data }) {

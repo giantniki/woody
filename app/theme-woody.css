@@ -32,11 +32,8 @@
 }
 
 /* --------------------------------------------------------------- cursor */
-/* graphic cursor (woo / beeldmerk / klaveren) — a soft shadow keeps the beige
-   marks legible over cream backgrounds. */
-.theme-woody .woo-cursor--woody .woo-cursor__ic {
-  filter: drop-shadow(0 2px 5px rgba(20, 4, 3, 0.4));
-}
+/* graphic cursor (woo / klaveren / beeldmerk) — colour handled by the
+   mix-blend-mode on .woo-cursor in globals.css. */
 
 /* ---------------------------------------------------------------- hero */
 /* Combined hero: landing-1 title (changing icon lockup) over landing-2's

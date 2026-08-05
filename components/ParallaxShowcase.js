@@ -100,7 +100,7 @@ export default function ParallaxShowcase({ dancing = false }) {
                 name={item.lockupImg}
                 color="beige"
                 alt={item.lockup.replace(/\n/g, " ")}
-                className="lockup-img"
+                className={`lockup-img lockup-img--${item.id}`}
               />
             ) : (
               <h2 className="lockup-text">

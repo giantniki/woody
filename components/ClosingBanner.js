@@ -43,19 +43,15 @@ export default function ClosingBanner({ dancing = false, colors = DEFAULT_COLORS
             className="closing__pre-img"
           />
         </div>
-        <a className="closing__banner" href={`mailto:${brand.email}`}>
-          <Woord
-            name="reserveren"
-            color="rood"
-            alt={closing.bannerLabel}
-            className="closing__banner-img"
-          />
+        <a
+          className="closing__banner"
+          href={`mailto:${brand.email}`}
+          aria-label={closing.bannerLabel}
+        >
+          {/* the designed word, filled with the cycling banner colour (mask) */}
+          <span className="closing__banner-word" aria-hidden="true" />
         </a>
       </section>
-      <footer className="closing__footer">
-        <span>© Bar Woody. Alle rechten voorbehouden.</span>
-        <a href={`mailto:${brand.email}`}>{brand.email}</a>
-      </footer>
     </>
   );
 }

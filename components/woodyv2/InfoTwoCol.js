@@ -16,35 +16,16 @@ export default function InfoTwoCol() {
         {/* ---- left: practical ---- */}
         <div className="v2-info__col">
           <h2>Bezoek ons</h2>
-          <p className="v2-info__place">{visit.primary.name}</p>
-
-          <p className="v2-info__label">Adres</p>
-          <p>{visit.primary.address}</p>
 
           <p className="v2-info__label">Openingstijden</p>
-          {visit.hours.map((h) => (
-            <p key={h.days} className="v2-info__hours">
-              <span>{h.days}</span>
-              <span>
-                {h.open}&ndash;{h.close}
-              </span>
-            </p>
-          ))}
+          <p>{visit.opening.line}</p>
 
           <p className="v2-info__label">Contact</p>
-          <p>Tel — {visit.primary.phone}</p>
           <p>
             <a href={`mailto:${brand.email}`}>{brand.email}</a>
           </p>
 
           <p className="v2-info__actions">
-            <a
-              href="https://maps.google.com/?q=Jansplein+56+Arnhem"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Route
-            </a>
             <a className="v2-info__cta" href="/reserveren">
               Reserveren
             </a>
@@ -56,10 +37,10 @@ export default function InfoTwoCol() {
           <h2>{woodyIntro.heading.replace("\n", " ")}</h2>
           <p className="v2-info__body">{woodyIntro.body}</p>
 
-          <p className="v2-info__label">Ook in</p>
+          <p className="v2-info__label">Woody in</p>
           <ul className="v2-info__locs">
             {locations.map((l) => (
-              <li key={l.city} className={l.current ? "is-current" : ""}>
+              <li key={l.city}>
                 <strong>{l.city}</strong>
                 <span>{l.address}</span>
                 <span>{l.phone}</span>

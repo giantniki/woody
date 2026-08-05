@@ -67,48 +67,41 @@ img {
   top: 0;
   left: 0;
   z-index: 9999;
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;
   will-change: transform;
   user-select: none;
+  /* colour shifts against whatever is underneath — the effect from taphuys-woody-2 */
+  mix-blend-mode: difference;
 }
-/* the three graphics stack on top of each other; classes on the container
-   cross-fade + scale between them (default → photo → click). */
+/* every icon renders at the same height, centred on the pointer; click cycles
+   which one is shown, photo-hover grows whichever is showing. */
 .woo-cursor__ic {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  left: 50%;
+  top: 50%;
+  height: 30px;
+  width: auto;
   opacity: 0;
-  transform: scale(1);
-  transition: opacity 0.16s ease, transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 0.14s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.woo-cursor__ic--default {
+.woo-cursor__ic.is-shown {
   opacity: 1;
 }
-/* photo hover → grow + swap to the ring mark */
-.woo-cursor.is-photo .woo-cursor__ic--default {
-  opacity: 0;
+/* grow over photos */
+.woo-cursor.is-photo .woo-cursor__ic.is-shown {
+  transform: translate(-50%, -50%) scale(2);
 }
-.woo-cursor.is-photo .woo-cursor__ic--photo {
-  opacity: 1;
-  transform: scale(2.1);
+/* tiny press feedback */
+.woo-cursor.is-down .woo-cursor__ic.is-shown {
+  transform: translate(-50%, -50%) scale(0.9);
 }
-/* link/button hover → a gentle grow of the default mark */
-.woo-cursor.is-hover .woo-cursor__ic--default {
-  transform: scale(1.4);
-}
-/* click → swap shape to the klaveren suit (wins over the others) */
-.woo-cursor.is-down .woo-cursor__ic {
-  opacity: 0;
-}
-.woo-cursor.is-down .woo-cursor__ic--click {
-  opacity: 1;
-  transform: scale(0.86);
+.woo-cursor.is-down.is-photo .woo-cursor__ic.is-shown {
+  transform: translate(-50%, -50%) scale(1.85);
 }
 body.has-woo-cursor,
 body.has-woo-cursor * {
@@ -364,7 +357,7 @@ body.has-woo-cursor * {
 
 .layer--lockup {
   inset: 0;
-  z-index: 3;
+  z-index: 6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -397,6 +390,11 @@ body.has-woo-cursor * {
   width: min(76vw, 640px);
   height: auto;
   filter: drop-shadow(0 8px 22px rgba(20, 4, 3, 0.28));
+}
+/* LUNCH · BORREL · DINER is a 3-line stacked lockup (~square) — size it down so
+   its letters match the single/double-line lockups instead of towering. */
+.lockup-img--borrel {
+  width: min(40vw, 340px);
 }
 .triplet__caption {
   position: absolute;

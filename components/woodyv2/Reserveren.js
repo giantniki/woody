@@ -1,4 +1,5 @@
 import { reserveren } from "@/lib/woody-reserveren";
+import Woord from "@/components/woodyv2/Woord";
 
 function Paras({ text }) {
   return String(text)
@@ -14,7 +15,12 @@ export default function Reserveren() {
   return (
     <section className="v2-ed v2-ed--reserveren">
       <div className="v2-ed__text">
-        <h1 className="v2-ed__title">{r.title}</h1>
+        <Woord
+          name="reserveren"
+          color="rood"
+          alt="Reserveren"
+          className="v2-ed__title-img"
+        />
 
         <div className="v2-ed__intro">
           <Paras text={r.intro} />
@@ -35,7 +41,7 @@ export default function Reserveren() {
         ))}
       </div>
 
-      <div className="v2-ed__photos v2-ed__photos--peek-down" aria-hidden="true">
+      <div className="v2-ed__photos v2-ed__photos--cover" aria-hidden="true">
         {r.photos.map((p, i) => (
           <div
             key={i}

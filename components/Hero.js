@@ -78,34 +78,27 @@ export default function Hero({ background = "photo", collageVariant = "default",
         </div>
       )}
 
-      {isWoodyLogo && (
+      {isWoodyLogo ? (
+        // spinning Bar Woody emblem — the centrepiece of the hero
         // eslint-disable-next-line @next/next/no-img-element
         <img
           className="hero__spin"
           src="/gfx/beeldmerk2-beige.svg"
-          alt=""
+          alt="Bar Woody"
           aria-hidden="true"
         />
-      )}
-
-      <div className="hero__lockup">
-        {isWoodyLogo ? (
-          <h1 className="hero__wd-logo">
-            <span className="hero__wd-logo__top">bar</span>
-            <span className="hero__wd-logo__main">woody</span>
-          </h1>
-        ) : (
-          <>
+      ) : (
+        <>
+          <div className="hero__lockup">
             <Smiley className="hero__icon" />
             <span className="hero__connector">{heroLockup.connector}</span>
             <RotatingIcon className="hero__icon hero__icon--rotating" />
-          </>
-        )}
-      </div>
-
-      <a className="hero__reserve" href="#reserveren">
-        {brand.reserveLabel}
-      </a>
+          </div>
+          <a className="hero__reserve" href="#reserveren">
+            {brand.reserveLabel}
+          </a>
+        </>
+      )}
     </header>
   );
 }

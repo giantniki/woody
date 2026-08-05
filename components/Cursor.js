@@ -17,6 +17,12 @@ export default function Cursor({ variant }) {
 
     document.body.classList.add("has-woo-cursor");
 
+    const icons = el.querySelectorAll(".woo-cursor__ic");
+    let idx = 0;
+    const show = (i) =>
+      icons.forEach((n, k) => n.classList.toggle("is-shown", k === i));
+    show(0);
+
     let x = window.innerWidth / 2;
     let y = window.innerHeight / 2;
     let tx = x;
@@ -29,18 +35,19 @@ export default function Cursor({ variant }) {
       el.style.opacity = "1";
     };
     const onLeave = () => (el.style.opacity = "0");
-    const onDown = () => el.classList.add("is-down");
+    // Click cycles through the icon set (all same size), Cara de Vaca style.
+    const onDown = () => {
+      el.classList.add("is-down");
+      idx = (idx + 1) % icons.length;
+      show(idx);
+    };
     const onUp = () => el.classList.remove("is-down");
 
-    // Grow over photos; a lighter "link" state over other interactive elements.
+    // Grow over photos.
     const PHOTO =
       "img, .photo, .hero__tile, .v2-ed__tile, .agenda__preview, [data-cursor='photo']";
     const onOver = (e) => {
-      const t = e.target;
-      const overPhoto = t.closest(PHOTO);
-      const overLink = t.closest("a, button, [data-cursor]");
-      el.classList.toggle("is-photo", Boolean(overPhoto));
-      el.classList.toggle("is-hover", Boolean(overLink) && !overPhoto);
+      el.classList.toggle("is-photo", Boolean(e.target.closest(PHOTO)));
     };
 
     const tick = () => {
@@ -75,18 +82,11 @@ export default function Cursor({ variant }) {
       ref={ref}
       aria-hidden="true"
     >
+      {/* click cycles through these — all rendered at the same size */}
       {/* eslint-disable @next/next/no-img-element */}
-      <img className="woo-cursor__ic woo-cursor__ic--default" src="/gfx/woo.png" alt="" />
-      <img
-        className="woo-cursor__ic woo-cursor__ic--photo"
-        src="/gfx/beeldmerk1-beige.svg"
-        alt=""
-      />
-      <img
-        className="woo-cursor__ic woo-cursor__ic--click"
-        src="/gfx/klaveren-beige.png"
-        alt=""
-      />
+      <img className="woo-cursor__ic" src="/gfx/woo.png" alt="" />
+      <img className="woo-cursor__ic" src="/gfx/klaveren-beige.png" alt="" />
+      <img className="woo-cursor__ic" src="/gfx/beeldmerk1-beige.svg" alt="" />
       {/* eslint-enable @next/next/no-img-element */}
     </div>
   );
